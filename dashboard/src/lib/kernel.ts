@@ -19,11 +19,14 @@ export interface Debt { id: number; item: string; status: string; note: string }
 export interface Proposal { id: string; text: string; parents: string[]; gen: number; fitness: number; novelty: number; status: string }
 export interface JournalRec { tick: number; ts: string; actions: string[]; prev_hash: string; hash: string }
 export interface Policy { rules: string[]; roles: Record<string, { lane: string; model: string; why: string }>; lanes: Record<string, string>; evidence: Record<string, string> }
+export interface SelfEvent { round: number; kind: string; event: string }
 export interface Bundle {
   status: KernelStatus; kg: KG; cell_complex: CellComplex; conflicts: unknown[];
   theorems: Theorem[]; predictions: Prediction[]; frontier: FrontierItem[];
   debts: Debt[]; pool: Proposal[]; journal: JournalRec[];
   policy: Policy;
+  vrp_ladder?: Record<string, string>[]; dalpha?: Record<string, string>[];
+  self_events?: SelfEvent[];
 }
 
 export async function loadBundle(): Promise<{ data: Bundle; source: 'github-live' | 'snapshot' }> {

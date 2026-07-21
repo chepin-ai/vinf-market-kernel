@@ -7,6 +7,7 @@ import ControlDeck from '../sections/ControlDeck';
 import KernelChat from '../sections/KernelChat';
 import SwarmView from '../sections/SwarmView';
 import ProverBoard from '../sections/ProverBoard';
+import FinanceBoard from '../sections/FinanceBoard';
 import Alerts, { computeAlerts } from '../sections/Alerts';
 
 function Panel({ title, right, children, className = '' }: {
@@ -32,15 +33,21 @@ function Light({ ok, label }: { ok: boolean | null; label: string }) {
   );
 }
 
-const TABS = ['蜂群', '证明引擎', '细胞复形', '哈希链', '注册表'] as const;
+const TABS = ['金融', '蜂群', '证明引擎', '细胞复形', '哈希链', '自*志', '全景·边界', '注册表'] as const;
+
+const KIND_COLOR: Record<string, string> = {
+  自修正: '#fbbf24', 自证伪: '#fb7185', 自修复: '#34d399', 自纠错: '#2dd4bf',
+  自完善: '#60a5fa', 自适应: '#a78bfa', 自演化: '#f472b6', 自监督: '#fb923c',
+};
 
 export default function Home() {
   const [bundle, setBundle] = useState<Bundle | null>(null);
   const [source, setSource] = useState('');
   const [verify, setVerify] = useState<ChainInfo | null>(null);
   const [verifying, setVerifying] = useState(false);
-  const [tab, setTab] = useState<(typeof TABS)[number]>('蜂群');
+  const [tab, setTab] = useState<(typeof TABS)[number]>('金融');
   const [tickAgo, setTickAgo] = useState('');
+  const [selNode, setSelNode] = useState<string | null>(null);
 
   useEffect(() => {
     const load = () => loadBundle().then(({ data, source }) => { setBundle(data); setSource(source); });
@@ -184,14 +191,39 @@ export default function Home() {
             </div>
           }
         >
+          {tab === '金融' && <FinanceBoard bundle={bundle} />}
           {tab === '蜂群' && <SwarmView bundle={bundle} />}
           {tab === '证明引擎' && <ProverBoard bundle={bundle} />}
           {tab === '细胞复形' && (
             <div>
-              <GraphView kg={kg} />
+              <GraphView kg={kg} onSelect={setSelNode} selected={selNode} />
+              {selNode && (
+                <div className="mt-2 rounded border border-cyan-500/40 bg-cyan-500/5 p-2">
+                  {(() => {
+                    const t = theorems.find((x) => x.id === selNode);
+                    const p = pool.find((x) => x.id === selNode);
+                    const rel = kg.edges.filter((e) => e.src === selNode || e.dst === selNode);
+                    return (
+                      <>
+                        <div className="flex items-center gap-2 font-mono text-xs">
+                          <span className="text-cyan-300">{selNode}</span>
+                          {t && <span className={`rounded border px-1.5 py-0.5 text-[10px] ${STATUS_STYLE[t.status] ?? ''}`}>{t.status}</span>}
+                          <button onClick={() => setSelNode(null)} className="ml-auto text-slate-500 hover:text-slate-300">✕</button>
+                        </div>
+                        {t && <p className="mt-1 text-[11px] text-slate-400">{t.statement}</p>}
+                        {t && <p className="mt-0.5 font-mono text-[10px] text-slate-600">verified_by: {t.verified_by} · round {t.round}</p>}
+                        {p && <p className="mt-1 text-[11px] text-slate-400">{p.text} · fit {p.fitness} · gen{p.gen}</p>}
+                        <p className="mt-1 font-mono text-[10px] text-slate-500">
+                          关联{rel.length}条: {rel.slice(0, 5).map((e) => `${e.src}→${e.dst}`).join(' · ')}
+                        </p>
+                      </>
+                    );
+                  })()}
+                </div>
+              )}
               <p className="mt-2 font-mono text-[10px] text-slate-600">
-                β₀={cc.betti0} β₁={cc.betti1} · {cc.V}V/{cc.E}E/{cc.F}F{cc.chi !== undefined ? ` · χ=${cc.chi}` : ''} ·
-                环: {cc.cells2.slice(0, 3).join(' / ') || '无'} —— 冗余证明路径=鲁棒性的拓扑度量
+                点击节点查看详情/关联 · β₀={cc.betti0} β₁={cc.betti1} · {cc.V}V/{cc.E}E/{cc.F}F{cc.chi !== undefined ? ` · χ=${cc.chi}` : ''} ·
+                环: {cc.cells2.slice(0, 3).join(' / ') || '无'}
               </p>
             </div>
           )}
@@ -209,6 +241,62 @@ export default function Home() {
                   <div className="mt-1 font-mono text-[9px] text-slate-600">prev {r.prev_hash.slice(0, 12)}…</div>
                 </div>
               ))}
+            </div>
+          )}
+          {tab === '自*志' && (
+            <div className="space-y-1.5">
+              {(bundle.self_events ?? []).map((e, i) => (
+                <div key={i} className="flex items-start gap-2 rounded border border-slate-700/50 bg-slate-900/50 p-2">
+                  <span className="mt-0.5 rounded border px-1.5 py-0.5 font-mono text-[10px]"
+                    style={{ color: KIND_COLOR[e.kind] ?? '#94a3b8', borderColor: (KIND_COLOR[e.kind] ?? '#94a3b8') + '55' }}>
+                    {e.kind}
+                  </span>
+                  <div>
+                    <p className="text-[11px] leading-relaxed text-slate-300">{e.event}</p>
+                    <p className="font-mono text-[9px] text-slate-600">round {e.round}</p>
+                  </div>
+                </div>
+              ))}
+              <p className="font-mono text-[10px] text-slate-600">引擎自*动态实录: 每一次自我修正/证伪/修复都留痕——这是自演化的审计轨</p>
+            </div>
+          )}
+          {tab === '全景·边界' && (
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+              <div>
+                <p className="mb-1.5 font-mono text-[10px] tracking-widest text-emerald-400">已建立 (幸存清单)</p>
+                {theorems.filter((t) => ['established', 'proved', 'certified'].includes(t.status)).map((t) => (
+                  <p key={t.id} className="border-l-2 border-emerald-500/50 pl-2 font-mono text-[10px] leading-relaxed text-slate-400">
+                    <span className="text-emerald-300">{t.id}</span> {t.statement.slice(0, 44)}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <p className="mb-1.5 font-mono text-[10px] tracking-widest text-rose-400">已证伪 (阵亡清单)</p>
+                {theorems.filter((t) => t.status === 'refuted').map((t) => (
+                  <p key={t.id} className="border-l-2 border-rose-500/50 pl-2 font-mono text-[10px] leading-relaxed text-slate-400">
+                    <span className="text-rose-300">{t.id}</span> {t.statement.slice(0, 44)}
+                  </p>
+                ))}
+                {bundle.predictions.filter((p) => p.status === 'refuted').map((p) => (
+                  <p key={p.id} className="border-l-2 border-rose-500/50 pl-2 font-mono text-[10px] leading-relaxed text-slate-400">
+                    <span className="text-rose-300">{p.id}</span> {p.statement.slice(0, 44)}
+                  </p>
+                ))}
+                <p className="mt-2 font-mono text-[9px] text-slate-600">阵亡与幸存同等珍贵——证伪是理论的边界刻刀</p>
+              </div>
+              <div>
+                <p className="mb-1.5 font-mono text-[10px] tracking-widest text-amber-400">开放边界 (理论不主张的)</p>
+                {theorems.filter((t) => ['open', 'axiom_candidate'].includes(t.status)).map((t) => (
+                  <p key={t.id} className="border-l-2 border-amber-500/50 pl-2 font-mono text-[10px] leading-relaxed text-slate-400">
+                    <span className="text-amber-300">{t.id}</span>[{t.status}] {t.statement.slice(0, 40)}
+                  </p>
+                ))}
+                {bundle.predictions.filter((p) => p.status === 'open').map((p) => (
+                  <p key={p.id} className="border-l-2 border-amber-500/50 pl-2 font-mono text-[10px] leading-relaxed text-slate-400">
+                    <span className="text-amber-300">{p.id}</span> {p.statement.slice(0, 40)}
+                  </p>
+                ))}
+              </div>
             </div>
           )}
           {tab === '注册表' && (

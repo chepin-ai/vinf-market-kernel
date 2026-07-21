@@ -3,7 +3,9 @@ import type { KG } from '../lib/kernel';
 import { NODE_COLOR } from '../lib/kernel';
 
 // 轻量力导向布局(无依赖): 知识图谱动态映射
-export default function GraphView({ kg }: { kg: KG }) {
+export default function GraphView({ kg, onSelect, selected }: {
+  kg: KG; onSelect?: (id: string | null) => void; selected?: string | null;
+}) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [hover, setHover] = useState<string | null>(null);
   const stateRef = useRef<{ x: number; y: number; vx: number; vy: number }[]>([]);
@@ -70,12 +72,20 @@ export default function GraphView({ kg }: { kg: KG }) {
       }
       kg.nodes.forEach((n, i) => {
         const c = NODE_COLOR[n.type] ?? '#94a3b8';
+        const isSel = selected === n.id;
+        if (isSel) {
+          ctx.beginPath();
+          ctx.arc(pos[i].x, pos[i].y, 22, 0, Math.PI * 2);
+          ctx.strokeStyle = '#22d3ee';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        }
         ctx.beginPath();
         ctx.arc(pos[i].x, pos[i].y, n.type === 'theorem' ? 14 : 10, 0, Math.PI * 2);
-        ctx.fillStyle = c + '33';
+        ctx.fillStyle = c + (isSel ? '88' : '33');
         ctx.fill();
-        ctx.strokeStyle = c;
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = isSel ? '#22d3ee' : c;
+        ctx.lineWidth = isSel ? 3 : 2;
         ctx.stroke();
         ctx.fillStyle = '#e2e8f0';
         ctx.font = '16px monospace';
@@ -95,12 +105,24 @@ export default function GraphView({ kg }: { kg: KG }) {
       });
       setHover(best);
     };
+    const onClick = (ev: MouseEvent) => {
+      if (!onSelect) return;
+      const r = canvas.getBoundingClientRect();
+      const mx = (ev.clientX - r.left) * 2, my = (ev.clientY - r.top) * 2;
+      let best: string | null = null;
+      kg.nodes.forEach((n, i) => {
+        if (Math.hypot(pos[i].x - mx, pos[i].y - my) < 30) best = n.id;
+      });
+      onSelect(best);
+    };
     canvas.addEventListener('mousemove', onMove);
+    canvas.addEventListener('click', onClick);
     return () => {
       cancelAnimationFrame(raf);
       canvas.removeEventListener('mousemove', onMove);
+      canvas.removeEventListener('click', onClick);
     };
-  }, [kg]);
+  }, [kg, selected, onSelect]);
 
   return (
     <div className="relative">
