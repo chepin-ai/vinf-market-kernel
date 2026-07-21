@@ -1,0 +1,60 @@
+{
+  "_doc": "v∞ 模型章法 v1 —— 角色×模型×负载的调度宪法（第39章）。依据：T30案实证（kimi检出循环定义/flash漏报）、推理型模型的reasoning_content行为、各通道限流特性。",
+  "roles": {
+    "prover": {
+      "lane": "deepseek",
+      "model": "deepseek-v4-pro",
+      "why": "推理链最深，胜任立论、证明草图、架构重构提案",
+      "temperature": 0.2,
+      "max_tokens": 2400
+    },
+    "falsifier_sharp": {
+      "lane": "kimi",
+      "model": "kimi-k2.6",
+      "why": "对抗审查最利：循环定义/隐藏假设/同义反复检出（T30案实证否决）",
+      "temperature": 0.3,
+      "max_tokens": 1200
+    },
+    "falsifier_deep": {
+      "lane": "deepseek",
+      "model": "deepseek-v4-pro",
+      "why": "长推理链攻击：复杂定理需要pro沿证明逐步找断点",
+      "temperature": 0.4,
+      "max_tokens": 1600
+    },
+    "triage": {
+      "lane": "deepseek2",
+      "model": "deepseek-v4-flash",
+      "why": "高通量初筛/蒸馏/摘要/批量分类：便宜快速；漏报率高故不作终审",
+      "temperature": null,
+      "max_tokens": 400
+    },
+    "scout": {
+      "lane": "kimi",
+      "model": "kimi-k2.6",
+      "why": "前沿检索与外部资源摘要（$web_search）",
+      "temperature": null,
+      "max_tokens": 800
+    }
+  },
+  "lanes": {
+    "deepseek": "泳道A（Key1）：pro系重任务——prover + falsifier_deep",
+    "deepseek2": "泳道B（Key2）：flash系轻任务蜂群——triage/distill/batch",
+    "kimi": "泳道C：falsifier_sharp + scout（异构先验来源）"
+  },
+  "rules": [
+    "R1 终审证伪组必须≥2个不同厂商（先验异构=T9区分器价值的来源）",
+    "R2 flash的『发现致命伤』计入T26聚合，其『通过』不计入——不对称权重：漏报成本高、误报成本低",
+    "R3 推理型任务（证明/长链/架构重构）一律pro系；温度随迭代0.4→0.1（探索→利用，sorry文档经验）",
+    "R4 token预算：pro≤2400/flash≤400；超限自动蒸馏截断；推理模型content为空时回退reasoning_content",
+    "R5 限流轮换：同泳道429/超时→立即切备用通道（kimi↔deepseek）；双Key间不作同角色负载均衡（角色隔离优先）",
+    "R6 任何LLM输出不改变命题状态——只有可执行代码（sympy/Z3/数值/数据检验）能判决（A2′/T9）",
+    "R7 提案池算子(变异/交叉)输出必须经蒸馏步骤提取命题本体后方可准入(元前缀污染实测)",
+    "R8 代码生成类任务: 模板填充+≥2500tok预算+自愈提取; 权威数学证书优先内置证明器(sympy/z3/numeric),LLM只做路线设计"
+  ],
+  "evidence": {
+    "T30案": "flash通过（漏报循环定义）而kimi否决（检出）→ 单样本证据支持R2不对称权重",
+    "LongCat": "401不可用，登记但不调度",
+    "v39基准": "证伪: pro 4/4最可靠; kimi锋利但冗长(≥1500tok); flash不稳(1轮2/2,1轮截断)。代码生成: 推理型模型直出代码6/6失败(散文/截断/未定义变量)→权威证书走内置证明器,LLM做路线设计; flash两次正确推出可积域r/(r-1)但未直出。池算子输出需蒸馏净化后准入。"
+  }
+}
