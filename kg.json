@@ -101,6 +101,11 @@
    "status": "established"
   },
   {
+   "id": "T31",
+   "type": "proposition",
+   "status": "open"
+  },
+  {
    "id": "closure#15",
    "type": "derived",
    "status": "derived"
@@ -112,6 +117,11 @@
   },
   {
    "id": "closure#17",
+   "type": "derived",
+   "status": "derived"
+  },
+  {
+   "id": "closure#26",
    "type": "derived",
    "status": "derived"
   },
@@ -135,6 +145,11 @@
   {
    "src": "T1",
    "dst": "SORRY-T1",
+   "rel": "dep"
+  },
+  {
+   "src": "T9",
+   "dst": "T31",
    "rel": "dep"
   },
   {
@@ -168,6 +183,16 @@
    "rel": "derives"
   },
   {
+   "src": "T31",
+   "dst": "closure#26",
+   "rel": "derives"
+  },
+  {
+   "src": "T9",
+   "dst": "closure#26",
+   "rel": "derives"
+  },
+  {
    "src": "P001",
    "dst": "P003",
    "rel": "evolves"
@@ -178,5 +203,5 @@
    "rel": "evolves"
   }
  ],
- "built": "2026-07-21 10:59:41"
+ "built": "2026-07-21 14:43:06"
 }

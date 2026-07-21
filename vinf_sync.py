@@ -17,7 +17,8 @@ TRACKED = [
     'bl_reconstruction.py', 'MarketKernel.lean',
     'theory_db.sqlite', 'journal39.jsonl', 'pool.json',
     'vrp_ladder.csv', 'dalpha_ladder.csv', 'dalpha_trimmed.csv',
-    'heartbeat_status.json', 'kg.json', 'STATUS.md',
+    'heartbeat_status.json', 'kg.json', 'STATUS.md', 'state_bundle.json',
+    'vinf_kg.py', 'vinf_sync.py',
 ]
 
 def _git(*args, cwd=REPO_DIR, check=True):

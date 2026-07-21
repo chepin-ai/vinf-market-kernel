@@ -130,5 +130,29 @@ if __name__ == '__main__':
     elif cmd == 'pool':
         for p in json.load(open(os.path.join(WORK, 'pool.json'))):
             print(' ', p['id'], p['status'], f"fit={p['fitness']}", p['text'][:50])
+    elif cmd == 'bundle':
+        """导出Dashboard状态包(单JSON契约) → state_bundle.json"""
+        import vinf_kg
+        db = _db()
+        kg = build_kg()
+        cc = vinf_kg.cell_complex(kg)
+        bundle = dict(
+            status=status(write=True), kg=kg, cell_complex=cc,
+            conflicts=vinf_kg.scan_conflicts(db),
+            theorems=[dict(id=r[0], kind=r[1], statement=r[2], status=r[3], verified_by=r[4], round=r[5])
+                      for r in db.query('SELECT id,kind,statement,status,verified_by,round FROM theorems')],
+            predictions=[dict(id=r[0], statement=r[1], test_by=r[2], status=r[3])
+                         for r in db.query('SELECT id,statement,test_by,status FROM predictions')],
+            frontier=[dict(id=r[0], finding=r[1], source=r[2], round=r[3])
+                      for r in db.query('SELECT id,finding,source,round FROM frontier ORDER BY id DESC LIMIT 40')],
+            debts=[dict(id=r[0], item=r[1], status=r[2], note=r[3])
+                   for r in db.query('SELECT id,item,status,note FROM debts')],
+            pool=json.load(open(os.path.join(WORK, 'pool.json'))),
+            journal=[json.loads(l) for l in open(os.path.join(WORK, 'journal39.jsonl'))],
+            policy=json.load(open(os.path.join(WORK, 'vinf_policy.json'))),
+        )
+        json.dump(bundle, open(os.path.join(WORK, 'state_bundle.json'), 'w'), ensure_ascii=False)
+        print(f"bundle: theorems={len(bundle['theorems'])} kg={len(kg['nodes'])}N/{len(kg['edges'])}E "
+              f"betti=({cc['betti0']},{cc['betti1']}) conflicts={len(bundle['conflicts'])}")
     else:
         print(__doc__)

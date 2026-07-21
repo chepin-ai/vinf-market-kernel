@@ -1,16 +1,16 @@
 {
- "ts": "2026-07-21 10:59:41",
+ "ts": "2026-07-21 14:43:06",
  "chain": {
   "ok": true,
   "hops": 3,
   "tail": "fdea9d9dfce5"
  },
  "db": {
-  "theorems": 20,
+  "theorems": 21,
   "predictions": 6,
   "assets": 0,
   "debts": 6,
-  "frontier": 23
+  "frontier": 24
  },
  "last_tick": "2026-07-21 10:57:22",
  "finance": [
@@ -24,7 +24,8 @@
   "GIBBS-2:proved",
   "SORRY-T1:proved",
   "T29:axiom_candidate",
-  "RENYI-MONO:certified"
+  "RENYI-MONO:certified",
+  "T31:open"
  ],
  "debts": [
   "2026决赛赔率行:open",
