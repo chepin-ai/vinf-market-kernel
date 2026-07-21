@@ -12,12 +12,37 @@
 """
 import json, os, sys, time, hashlib
 
-WORK = '/mnt/agents/work/worldcup2026'
+# 看门狗首条代码评审修复(2026-07-21): 新沙箱无/mnt路径时verify误报"日志缺席"
+_DEFAULT_WORK = '/mnt/agents/work/worldcup2026'
+WORK = os.environ.get('VINF_WORK') or (
+    _DEFAULT_WORK if os.path.isdir(_DEFAULT_WORK)
+    else os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, WORK)
 
 def _db():
     import vinf_agents as va
     return va.TheoryDB(os.path.join(WORK, 'theory_db.sqlite'))
+
+def _csv_rows(name, limit=200):
+    import csv
+    p = os.path.join(WORK, name)
+    if not os.path.exists(p):
+        return []
+    with open(p) as f:
+        return list(csv.DictReader(f))[:limit]
+
+# 引擎自*事件志(真实历史): 自修正/自证伪/自修复/自纠错/自完善/自适应/人在回路
+SELF_EVENTS = [
+    dict(round=38, kind='自修正', event='E5"严格单调"被测试锻造证伪→精化为秩相关0.9表述——机器抓出人类措辞过度'),
+    dict(round=37, kind='自证伪', event='T30(τ=κ(1−c))被kimi否决为循环定义→T26聚合veto→残差入库为E4'),
+    dict(round=39, kind='自修复', event='LLM证明脚本散文/中文标点→自愈手术提取器(SyntaxError行剔除重试)'),
+    dict(round=39, kind='自修复', event='chdir路径事故致双库分叉→脚本目录锚定+显式cwd纪律'),
+    dict(round=39, kind='自纠错', event='判决解析器把"无反例"误判为反例→严格输出格式(判决:通过/否决)——法官也需被审判'),
+    dict(round=39, kind='自完善', event='池算子元前缀污染→章法R7: 算子输出须经蒸馏提取命题本体'),
+    dict(round=37, kind='自适应', event='推理模型reasoning耗尽预算→蒸馏步骤+预算规则R4(涌现的调度补丁)'),
+    dict(round=40, kind='自演化', event='手机端心跳Git-first恢复26文件并消解数据债#1; 无写权限→经人并轨(人在回路实践)'),
+    dict(round=40, kind='自监督', event='看门狗检出verify路径误报→WORK环境变量回退修复——监督者首次输出代码评审'),
+]
 
 def verify_chain():
     """全程重算哈希链: 任何篡改都会断链"""
@@ -150,6 +175,9 @@ if __name__ == '__main__':
             pool=json.load(open(os.path.join(WORK, 'pool.json'))),
             journal=[json.loads(l) for l in open(os.path.join(WORK, 'journal39.jsonl'))],
             policy=json.load(open(os.path.join(WORK, 'vinf_policy.json'))),
+            vrp_ladder=_csv_rows('vrp_ladder.csv'),
+            dalpha=_csv_rows('dalpha_trimmed.csv'),
+            self_events=SELF_EVENTS,
         )
         json.dump(bundle, open(os.path.join(WORK, 'state_bundle.json'), 'w'), ensure_ascii=False)
         print(f"bundle: theorems={len(bundle['theorems'])} kg={len(kg['nodes'])}N/{len(kg['edges'])}E "
