@@ -1,0 +1,182 @@
+{
+ "nodes": [
+  {
+   "id": "T2",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T5",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T6",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T9",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T13",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T16",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T17",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T20",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T23",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T26",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T27",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "T28",
+   "type": "conditional",
+   "status": "established"
+  },
+  {
+   "id": "C8",
+   "type": "corollary",
+   "status": "established"
+  },
+  {
+   "id": "AX-MAX",
+   "type": "sorry-resolution",
+   "status": "proved"
+  },
+  {
+   "id": "GIBBS-2",
+   "type": "sorry-resolution",
+   "status": "proved"
+  },
+  {
+   "id": "T1",
+   "type": "theorem",
+   "status": "established"
+  },
+  {
+   "id": "SORRY-T1",
+   "type": "sorry-resolution",
+   "status": "proved"
+  },
+  {
+   "id": "T29",
+   "type": "conditional",
+   "status": "axiom_candidate"
+  },
+  {
+   "id": "RENYI-MONO",
+   "type": "sorry-resolution",
+   "status": "certified"
+  },
+  {
+   "id": "E5",
+   "type": "empirical",
+   "status": "established"
+  },
+  {
+   "id": "closure#15",
+   "type": "derived",
+   "status": "derived"
+  },
+  {
+   "id": "closure#16",
+   "type": "derived",
+   "status": "derived"
+  },
+  {
+   "id": "closure#17",
+   "type": "derived",
+   "status": "derived"
+  },
+  {
+   "id": "P001",
+   "type": "proposal",
+   "status": "open"
+  },
+  {
+   "id": "P002",
+   "type": "proposal",
+   "status": "open"
+  },
+  {
+   "id": "P003",
+   "type": "proposal",
+   "status": "raw-need-distill"
+  }
+ ],
+ "edges": [
+  {
+   "src": "T1",
+   "dst": "SORRY-T1",
+   "rel": "dep"
+  },
+  {
+   "src": "E4",
+   "dst": "closure#15",
+   "rel": "derives"
+  },
+  {
+   "src": "E5",
+   "dst": "closure#15",
+   "rel": "derives"
+  },
+  {
+   "src": "T13",
+   "dst": "closure#16",
+   "rel": "derives"
+  },
+  {
+   "src": "E5",
+   "dst": "closure#16",
+   "rel": "derives"
+  },
+  {
+   "src": "T26",
+   "dst": "closure#17",
+   "rel": "derives"
+  },
+  {
+   "src": "E4",
+   "dst": "closure#17",
+   "rel": "derives"
+  },
+  {
+   "src": "P001",
+   "dst": "P003",
+   "rel": "evolves"
+  },
+  {
+   "src": "P002",
+   "dst": "P003",
+   "rel": "evolves"
+  }
+ ],
+ "built": "2026-07-21 10:59:41"
+}
