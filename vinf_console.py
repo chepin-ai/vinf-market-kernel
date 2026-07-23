@@ -353,5 +353,16 @@ if __name__ == '__main__':
         """全量测试套件: 验证所有核心组件"""
         _run_tests()
 
+    elif cmd == 'zkp':
+        """ZKP演示: 零知识证明协议验证"""
+        import vinf_zkp
+        result = vinf_zkp.demo_zkp()
+        print(f"ZKP验证: {'通过' if result['verified'] else '失败'}")
+        print(f"公开参数: g={result['public']['g']}, p={result['public']['p']}, y={result['public']['y']}")
+        print(f"交互记录: {len(result['transcript'])} 轮")
+        for step, val in result['transcript']:
+            print(f"  [{step}] {str(val)[:50]}")
+        print(f"零知识保证: {result['zero_knowledge']}")
+
     else:
         print(__doc__)
