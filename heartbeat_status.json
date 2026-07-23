@@ -1,38 +1,57 @@
 {
- "ts": "2026-07-23 14:10:24",
- "chain": {
-  "ok": true,
-  "hops": 8,
-  "tail": "1d6194e65a49"
- },
- "db": {
-  "theorems": 21,
-  "predictions": 6,
-  "assets": 0,
-  "debts": 6,
-  "frontier": 36
- },
- "last_tick": "2026-07-23 14:10:24",
- "finance": [
-  "[fin:F4] skip — sharpapi快照缺席(历史资产)",
-  "[fin:F3] skip — 缺数据",
-  "[fin:F2] skip — 缺数据",
-  "[fin:F1] skip — vrp_ladder.csv缺席"
- ],
- "sorries": [
-  "AX-MAX:proved",
-  "GIBBS-2:proved",
-  "SORRY-T1:proved",
-  "T29:axiom_candidate",
-  "RENYI-MONO:certified",
-  "T31:open"
- ],
- "debts": [
-  "2026决赛赔率行:closed",
-  "世界杯O/U赔率:open",
-  "电竞BO5(已消亡):closed",
-  "SPY期权面(下载中):closed",
-  "四年谱检验(已消解):closed",
-  "逐庄面板(已消解):closed"
- ]
+  "ts": "2026-07-23 14:12:37",
+  "chain": {
+    "ok": true,
+    "hops": 8,
+    "tail": "1d6194e65a49"
+  },
+  "db": {
+    "theorems": 21,
+    "predictions": 6,
+    "assets": 0,
+    "debts": 6,
+    "frontier": 36
+  },
+  "last_tick": "2026-07-23 14:12:37",
+  "finance": [
+    "[fin:F4] skip — sharpapi快照缺席(历史资产)",
+    "[fin:F3] skip — 缺数据",
+    "[fin:F2] skip — 缺数据",
+    "[fin:F1] skip — vrp_ladder.csv缺席"
+  ],
+  "sorries": [
+    "AX-MAX:proved",
+    "GIBBS-2:proved",
+    "SORRY-T1:proved",
+    "T29:axiom_candidate",
+    "RENYI-MONO:certified",
+    "T31:open"
+  ],
+  "debts": [
+    "2026决赛赔率行:closed",
+    "世界杯O/U赔率:open",
+    "电竞BO5(已消亡):closed",
+    "SPY期权面(下载中):closed",
+    "四年谱检验(已消解):closed",
+    "逐庄面板(已消解):closed"
+  ],
+  "ch44": {
+    "test_suite": "10/10 PASS",
+    "new_modules": [
+      "APIKeyPool",
+      "consensus_route",
+      "persistent_homology",
+      "memory_5_layers",
+      "sandbox_mp"
+    ],
+    "cell_complex": {
+      "V": 28,
+      "E": 10,
+      "F": 3,
+      "betti0": 19,
+      "betti1": 1,
+      "chi": 21
+    },
+    "git_user": "chepin-ai"
+  }
 }
