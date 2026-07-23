@@ -1,9 +1,9 @@
 {
-  "ts": "2026-07-23 13:52:23",
+  "ts": "2026-07-23 13:57:54",
   "chain": {
     "ok": true,
-    "hops": 5,
-    "tail": "091560e8f6b3"
+    "hops": 7,
+    "tail": "c15a1214660e"
   },
   "db": {
     "theorems": 21,
@@ -12,7 +12,7 @@
     "debts": 6,
     "frontier": 32
   },
-  "last_tick": "2026-07-23 13:52:23",
+  "last_tick": "2026-07-23 13:57:54",
   "finance": [
     "[fin:F4] skip — sharpapi快照缺席(历史资产)",
     "[fin:F3] skip — 缺数据",
@@ -35,12 +35,20 @@
     "四年谱检验(已消解):closed",
     "逐庄面板(已消解):closed"
   ],
-  "api_keys": {
-    "github": "✓ chepin-ai",
-    "deepseek": "✓ 77.83 CNY",
-    "kimi": "✓ models listed",
-    "kaggle": "✓ connected",
-    "longcat": "configured"
+  "cell_complex": {
+    "V": 28,
+    "E": 10,
+    "F": 3,
+    "betti0": 19,
+    "betti1": 1,
+    "cells2": [
+      "T9~T31",
+      "T31~closure#26",
+      "T9~closure#26"
+    ],
+    "chi": 21
   },
-  "git_push": "✓ origin/main up-to-date"
+  "conflicts": 0,
+  "sorry_resolved": 1,
+  "git_user": "chepin-ai"
 }

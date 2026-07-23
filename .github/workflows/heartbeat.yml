@@ -1,0 +1,30 @@
+name: v∞ Heartbeat
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 每6小时
+  workflow_dispatch:
+
+jobs:
+  heartbeat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deps
+        run: pip install numpy scipy sympy
+      - name: Verify chain
+        run: python3 vinf_console.py verify
+      - name: Tick
+        run: python3 vinf_console.py tick
+      - name: Bundle
+        run: python3 vinf_console.py bundle
+      - name: Commit & Push
+        run: |
+          git config user.name "chepin-ai"
+          git config user.email "chepin@163.com"
+          git add -A
+          git commit -m "[v∞] auto heartbeat $(date -u +%Y-%m-%d-%H:%M)" || true
+          git push
