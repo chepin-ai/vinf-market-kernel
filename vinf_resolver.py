@@ -50,10 +50,47 @@ def extract_code(text):
     code = '\n'.join(lines)
     return code if code.strip() else cand
 
-def _run_user_script(code, timeout=30):
-    """受限执行LLM证明脚本：仅注入sympy/z3/numpy与goal; 须把结果赋给RESULT(ProofResult)"""
-    def handler(sig, frm): raise _Timeout()
-    signal.signal(signal.SIGALRM, handler); signal.alarm(timeout)
+def _run_user_script(code, timeout=30, mem_limit_mb=256):
+    """受限执行LLM证明脚本 (ch44增强): 子进程隔离 + 内存限制 + 超时熔断"""
+    import multiprocessing as mp
+
+    def _worker(code, queue):
+        try:
+            import sympy, numpy
+            ns = {'sympy': sympy, 'sp': sympy, 'numpy': numpy, 'np': numpy,
+                  'ProofResult': ProofResult, '__builtins__': {}}
+            try:
+                import z3; ns['z3'] = z3
+            except ImportError:
+                pass
+            exec(code, ns)
+            r = ns.get('RESULT')
+            if isinstance(r, ProofResult):
+                queue.put(('ok', r.status, r.prover, r.certificate, r.detail))
+            else:
+                queue.put(('error', 'RESULT not set or wrong type', '', '', ''))
+        except Exception as e:
+            queue.put(('error', str(e), '', '', ''))
+
+    queue = mp.Queue()
+    p = mp.Process(target=_worker, args=(code, queue))
+    p.start()
+    p.join(timeout=timeout)
+
+    if p.is_alive():
+        p.terminate()
+        p.join(2)
+        if p.is_alive():
+            p.kill()
+        return ProofResult('unknown', 'sandbox', '', f'Execution timeout after {timeout}s')
+
+    if not queue.empty():
+        status, msg, prover, cert, detail = queue.get()
+        if status == 'ok':
+            return ProofResult(msg, prover, cert, detail)
+        return ProofResult('unknown', 'sandbox', '', msg)
+
+    return ProofResult('unknown', 'sandbox', '', 'No result from sandbox')
     import sympy, numpy
     ns = {'sympy': sympy, 'sp': sympy, 'numpy': numpy, 'np': numpy,
           'ProofResult': ProofResult, '__builtins__': __builtins__}

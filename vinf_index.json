@@ -1,0 +1,34 @@
+{
+  "theorem_to_prover": {
+    "identity": [
+      "sympy"
+    ],
+    "ineq_min_zero": [
+      "sympy",
+      "numeric"
+    ],
+    "sup_mean": [
+      "z3"
+    ],
+    "maxitive_axioms": [
+      "z3"
+    ],
+    "grid_nonneg": [
+      "numeric"
+    ]
+  },
+  "status_routing": {
+    "open": [
+      "sympy",
+      "z3",
+      "numeric"
+    ],
+    "axiom_candidate": [
+      "lean"
+    ],
+    "proved": [
+      "cross_validate"
+    ]
+  },
+  "last_updated": "2026-07-23 14:08:04"
+}

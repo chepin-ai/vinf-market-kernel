@@ -87,3 +87,47 @@ class Panel:
         """T26规则: 否决=最大池(任一证伪者发现致命伤→驳回), 共识=均值池(评语汇总)"""
         kills = [f for f, v in verdicts if any(w in v for w in ['反例','致命','循环','不成立','错误']) and '通过' not in v[:6]]
         return ('veto', kills) if kills else ('pass', [])
+
+
+# ===================== APIKeyPool (ch44) =====================
+class APIKeyPool:
+    """API 密钥池：轮询 + 故障转移 + 速率感知"""
+    def __init__(self, keys):
+        if isinstance(keys, str):
+            keys = [keys]
+        self.keys = list(keys)
+        self.failures = {k: 0 for k in self.keys}
+        self.last_used = {k: 0.0 for k in self.keys}
+        self.successes = {k: 0 for k in self.keys}
+
+    def get(self):
+        """获取最久未使用且健康的密钥"""
+        healthy = [k for k in self.keys if self.failures[k] < 3]
+        if not healthy:
+            raise RuntimeError("All API keys exhausted")
+        key = min(healthy, key=lambda k: self.last_used[k])
+        self.last_used[key] = time.time()
+        return key
+
+    def report(self, key, ok):
+        if ok:
+            self.failures[key] = max(0, self.failures[key] - 1)
+            self.successes[key] += 1
+        else:
+            self.failures[key] += 1
+
+    def status(self):
+        return {k: {"failures": self.failures[k], "successes": self.successes[k], 
+                    "healthy": self.failures[k] < 3} for k in self.keys}
+
+# 全局密钥池注册
+KEY_POOLS = {}
+def register_key_pool(name, keys):
+    KEY_POOLS[name] = APIKeyPool(keys)
+
+def get_key(name):
+    return KEY_POOLS[name].get() if name in KEY_POOLS else None
+
+def report_key(name, key, ok):
+    if name in KEY_POOLS:
+        KEY_POOLS[name].report(key, ok)

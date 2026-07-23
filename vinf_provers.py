@@ -136,3 +136,50 @@ def route(goal):
         if r.status != 'unknown':
             return r
     return ProofResult('unknown', 'router', detail='所有自动证明器无法判决')
+
+
+# ===================== 多智能体共识验证 (ch44) =====================
+def consensus_route(goal, threshold=0.5, methods=None):
+    """多证明器共识验证：独立验证 + 投票 + 阈值判定
+
+    Args:
+        goal: 证明目标
+        threshold: 通过阈值 (0.0-1.0)，默认 0.5 即多数通过
+        methods: 指定证明器列表，默认全部
+
+    Returns:
+        ProofResult: 共识结果，prover='consensus', certificate 包含详细投票记录
+    """
+    methods = methods or ['sympy', 'z3', 'numeric']
+    table = {p.name: p for p in PROVERS}
+
+    votes = []
+    for name in methods:
+        if name not in table:
+            continue
+        p = table[name]
+        if hasattr(p, 'available') and not p.available():
+            votes.append((name, 'unavailable', '证明器未安装'))
+            continue
+        r = p.prove(goal)
+        votes.append((name, r.status, r.detail[:100]))
+
+    if not votes:
+        return ProofResult('unknown', 'consensus', '', '无可用证明器')
+
+    # 统计
+    proved = sum(1 for _, s, _ in votes if s in ('proved', 'certified'))
+    refuted = sum(1 for _, s, _ in votes if s == 'refuted')
+    total = len(votes)
+
+    cert = json.dumps(votes, ensure_ascii=False)
+
+    if proved / total >= threshold:
+        return ProofResult('proved', 'consensus', cert, 
+            f'共识通过: {proved}/{total} 证明器确认 (阈值={threshold})')
+    if refuted / total >= threshold:
+        return ProofResult('refuted', 'consensus', cert,
+            f'共识否决: {refuted}/{total} 证明器反例 (阈值={threshold})')
+
+    return ProofResult('unknown', 'consensus', cert,
+        f'未达共识: proved={proved}, refuted={refuted}, total={total}')

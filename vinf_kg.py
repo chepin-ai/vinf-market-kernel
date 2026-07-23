@@ -81,3 +81,73 @@ if __name__ == '__main__':
     print('细胞复形:', cc)
     import vinf_agents as va
     print('冲突扫描:', scan_conflicts(va.TheoryDB(os.path.join(WORK, 'theory_db.sqlite'))))
+
+
+# ===================== 持久同调增强 (ch44) =====================
+def persistent_homology(kg, max_dim=2):
+    """知识图谱的持久同调分析：追踪命题拓扑稳定性
+
+    使用 Vietoris-Rips 复形近似，计算 barcode 和持久 Betti 数。
+    返回各维度的持久特征（birth, death, persistence）。
+    """
+    nodes = [n['id'] for n in kg['nodes']]
+    idx = {n: i for i, n in enumerate(nodes)}
+    edges = [(idx[e['src']], idx[e['dst']]) for e in kg['edges'] 
+             if e['src'] in idx and e['dst'] in idx]
+
+    if not edges:
+        return dict(betti_persistent={0: len(nodes)}, barcodes=[])
+
+    # 构建距离矩阵（图距离）
+    import numpy as np
+    n = len(nodes)
+    dist = np.full((n, n), np.inf)
+    np.fill_diagonal(dist, 0)
+    for a, b in edges:
+        dist[a, b] = 1
+        dist[b, a] = 1
+
+    # Floyd-Warshall 计算全对最短路径
+    for k in range(n):
+        dist = np.minimum(dist, dist[:, k:k+1] + dist[k:k+1, :])
+
+    # 计算 Vietoris-Rips filtration 的 Betti 数近似
+    # 使用连通分量数作为 β₀ 的近似
+    parent = list(range(n))
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for a, b in edges:
+        parent[find(a)] = find(b)
+    components = len({find(i) for i in range(n)})
+
+    # 持久特征：birth=0（边出现），death=无穷（无更高维填充）
+    barcodes = []
+    for dim in range(max_dim + 1):
+        if dim == 0:
+            # 0-维: 每个节点 birth=0，合并时 death=1
+            barcodes.append([(0, 1, 'component_merge') for _ in range(n - components)])
+            barcodes.append([(0, float('inf'), 'persistent_component') for _ in range(components)])
+        elif dim == 1:
+            # 1-维: 环的 birth=1（边闭合），death=∞（无 2-胞填充）
+            cc = cell_complex(kg)
+            barcodes.append([(1, float('inf'), 'persistent_cycle') for _ in range(cc['betti1'])])
+
+    return dict(
+        betti_persistent={0: components, 1: cc.get('betti1', 0)},
+        barcodes=barcodes,
+        components=components,
+        n_nodes=n,
+        n_edges=len(edges)
+    )
+
+def knowledge_stability(kg, round_history=None):
+    """知识稳定性评分：基于持久同调的图谱演化健康度"""
+    ph = persistent_homology(kg)
+    # 稳定性 = 持久特征数 / 总特征数
+    persistent = sum(1 for bc in ph['barcodes'] for b in bc if b[1] == float('inf'))
+    total = sum(len(bc) for bc in ph['barcodes'])
+    stability = persistent / total if total > 0 else 1.0
+    return dict(stability=stability, persistent=persistent, total=total, **ph)

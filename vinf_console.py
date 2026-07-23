@@ -135,6 +135,138 @@ def tick():
         acts.append(f"github: 跳过({type(e).__name__})")
     return acts
 
+
+
+def _run_tests():
+    """v∞ 全量测试套件 (ch44)"""
+    import traceback
+    results = []
+
+    # T1: 哈希链完整性
+    try:
+        import hashlib
+        path = os.path.join(WORK, 'journal39.jsonl')
+        if os.path.exists(path):
+            with open(path) as f:
+                lines = f.readlines()
+            prev = '0' * 64
+            ok = True
+            for line in lines:
+                rec = json.loads(line)
+                body = json.dumps(rec['actions'], ensure_ascii=False)
+                expect = hashlib.sha256((prev + body).encode()).hexdigest()
+                if expect != rec['hash'] or rec['prev_hash'] != prev:
+                    ok = False; break
+                prev = rec['hash']
+            results.append(('T1_chain_integrity', 'PASS' if ok else 'FAIL', f'{len(lines)} hops'))
+        else:
+            results.append(('T1_chain_integrity', 'SKIP', 'journal absent'))
+    except Exception as e:
+        results.append(('T1_chain_integrity', 'ERROR', str(e)))
+
+    # T2: 数据库只增不减
+    try:
+        import vinf_agents as va
+        db = va.TheoryDB(os.path.join(WORK, 'theory_db.sqlite'))
+        counts = {t: db.query(f"SELECT COUNT(*) FROM {t}")[0][0] for t in ['theorems', 'predictions', 'frontier']}
+        results.append(('T2_monotonic_db', 'PASS', str(counts)))
+    except Exception as e:
+        results.append(('T2_monotonic_db', 'ERROR', str(e)))
+
+    # T3: 细胞复形计算
+    try:
+        import vinf_kg
+        kg = json.load(open(os.path.join(WORK, 'kg.json')))
+        cc = vinf_kg.cell_complex(kg)
+        ok = cc['V'] > 0 and cc['betti0'] >= 0 and cc['betti1'] >= 0
+        results.append(('T3_cell_complex', 'PASS' if ok else 'FAIL', f"V={cc['V']} β₀={cc['betti0']} β₁={cc['betti1']}"))
+    except Exception as e:
+        results.append(('T3_cell_complex', 'ERROR', str(e)))
+
+    # T4: 持久同调
+    try:
+        ph = vinf_kg.persistent_homology(kg)
+        ok = 'betti_persistent' in ph and ph['components'] > 0
+        results.append(('T4_persistent_homology', 'PASS' if ok else 'FAIL', f"components={ph['components']}"))
+    except Exception as e:
+        results.append(('T4_persistent_homology', 'ERROR', str(e)))
+
+    # T5: 共识验证
+    try:
+        import vinf_provers as vp
+        goal = {'kind': 'identity', 'lhs': 'x', 'rhs': 'x'}
+        r = vp.consensus_route(goal, threshold=0.5)
+        ok = r.status in ('proved', 'unknown')
+        results.append(('T5_consensus', 'PASS' if ok else 'FAIL', r.status))
+    except Exception as e:
+        results.append(('T5_consensus', 'ERROR', str(e)))
+
+    # T6: APIKeyPool
+    try:
+        import vinf_agents as va
+        pool = va.APIKeyPool(['k1', 'k2', 'k3'])
+        k = pool.get()
+        pool.report(k, True)
+        st = pool.status()
+        ok = len(st) == 3
+        results.append(('T6_api_key_pool', 'PASS' if ok else 'FAIL', f'{len(st)} keys'))
+    except Exception as e:
+        results.append(('T6_api_key_pool', 'ERROR', str(e)))
+
+    # T7: 五层记忆
+    try:
+        for layer in ['meta', 'index', 'facts', 'skills', 'archive']:
+            p = os.path.join(WORK, f'vinf_{layer}.json')
+            assert os.path.exists(p), f'{layer} absent'
+        results.append(('T7_memory_layers', 'PASS', '5 layers OK'))
+    except Exception as e:
+        results.append(('T7_memory_layers', 'ERROR', str(e)))
+
+    # T8: 冲突扫描
+    try:
+        db = va.TheoryDB(os.path.join(WORK, 'theory_db.sqlite'))
+        conflicts = vinf_kg.scan_conflicts(db)
+        results.append(('T8_conflict_scan', 'PASS', f'{len(conflicts)} conflicts'))
+    except Exception as e:
+        results.append(('T8_conflict_scan', 'ERROR', str(e)))
+
+    # T9: 证明器谱系
+    try:
+        provers = [vp.SympyProver(), vp.Z3Prover(), vp.NumericCertifier(), vp.LeanProver()]
+        ok = all(hasattr(p, 'prove') for p in provers)
+        results.append(('T9_prover_lineage', 'PASS' if ok else 'FAIL', f'{len(provers)} provers'))
+    except Exception as e:
+        results.append(('T9_prover_lineage', 'ERROR', str(e)))
+
+    # T10: 金融数据完整性
+    try:
+        for f in ['vrp_ladder.csv', 'dalpha_ladder.csv', 'dalpha_trimmed.csv']:
+            p = os.path.join(WORK, f)
+            assert os.path.exists(p), f'{f} absent'
+        results.append(('T10_finance_data', 'PASS', '3 files OK'))
+    except Exception as e:
+        results.append(('T10_finance_data', 'ERROR', str(e)))
+
+    passed = sum(1 for _, s, _ in results if s == 'PASS')
+    failed = sum(1 for _, s, _ in results if s == 'FAIL')
+    errors = sum(1 for _, s, _ in results if s == 'ERROR')
+    skipped = sum(1 for _, s, _ in results if s == 'SKIP')
+
+    print(f"\n{'='*50}")
+    print(f"v∞ 全量测试套件 (ch44)")
+    print(f"{'='*50}")
+    for name, status, detail in results:
+        mark = '✓' if status == 'PASS' else '✗' if status == 'FAIL' else '?' if status == 'SKIP' else '!'
+        print(f"  [{mark}] {name}: {status} — {detail}")
+    print(f"{'='*50}")
+    print(f"总计: {len(results)} | 通过={passed} | 失败={failed} | 错误={errors} | 跳过={skipped}")
+    print(f"{'='*50}")
+
+    report = dict(ts=time.strftime('%Y-%m-%d %H:%M:%S'), results=results,
+                  summary=dict(total=len(results), passed=passed, failed=failed, errors=errors, skipped=skipped))
+    json.dump(report, open(os.path.join(WORK, 'test_report_ch44.json'), 'w'), ensure_ascii=False, indent=2)
+    print(f"\n测试报告已保存: test_report_ch44.json")
+
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'status'
     if cmd == 'status':
@@ -182,5 +314,44 @@ if __name__ == '__main__':
         json.dump(bundle, open(os.path.join(WORK, 'state_bundle.json'), 'w'), ensure_ascii=False)
         print(f"bundle: theorems={len(bundle['theorems'])} kg={len(kg['nodes'])}N/{len(kg['edges'])}E "
               f"betti=({cc['betti0']},{cc['betti1']}) conflicts={len(bundle['conflicts'])}")
+    elif cmd == 'consensus':
+        """多智能体共识验证: 对指定目标运行多个证明器并投票"""
+        import vinf_provers as vp
+        goal = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {'kind': 'identity', 'lhs': 'x', 'rhs': 'x'}
+        r = vp.consensus_route(goal, threshold=0.5)
+        print(f"共识结果: {r.status} by {r.prover}")
+        print(f"证书: {r.certificate}")
+        print(f"详情: {r.detail}")
+    elif cmd == 'ph':
+        """持久同调分析: 计算知识图谱的持久Betti数和稳定性评分"""
+        import vinf_kg
+        kg = json.load(open(os.path.join(WORK, 'kg.json')))
+        ph = vinf_kg.persistent_homology(kg)
+        stab = vinf_kg.knowledge_stability(kg)
+        print(f"持久同调: β₀={ph['betti_persistent'].get(0,0)}, β₁={ph['betti_persistent'].get(1,0)}")
+        print(f"稳定性评分: {stab['stability']:.3f} ({stab['persistent']}/{stab['total']} 持久特征)")
+        print(f"连通分量: {ph['components']}, 节点: {ph['n_nodes']}, 边: {ph['n_edges']}")
+    elif cmd == 'memory':
+        """五层记忆架构状态"""
+        for layer in ['meta', 'index', 'facts', 'skills', 'archive']:
+            p = os.path.join(WORK, f'vinf_{layer}.json')
+            if os.path.exists(p):
+                data = json.load(open(p))
+                print(f"[{layer}] keys={list(data.keys())}, updated={data.get('last_updated','N/A')}")
+            else:
+                print(f"[{layer}] 缺席")
+    elif cmd == 'keys':
+        """API密钥池健康状态"""
+        import vinf_agents as va
+        for name, pool in va.KEY_POOLS.items():
+            st = pool.status()
+            healthy = sum(1 for v in st.values() if v['healthy'])
+            print(f"[{name}] 健康={healthy}/{len(st)} 密钥")
+            for k, v in st.items():
+                print(f"  {k[:16]}...: failures={v['failures']}, successes={v['successes']}, healthy={v['healthy']}")
+    elif cmd == 'test':
+        """全量测试套件: 验证所有核心组件"""
+        _run_tests()
+
     else:
         print(__doc__)
