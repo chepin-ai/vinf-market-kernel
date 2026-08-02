@@ -1,0 +1,32 @@
+[
+ {
+  "id": "P001",
+  "text": "叙事税沿期权期限强正相关递增,长端恒正(E5)",
+  "parents": [],
+  "gen": 0,
+  "fitness": 0.6,
+  "novelty": 1.0,
+  "status": "open"
+ },
+ {
+  "id": "P002",
+  "text": "协议税∝叙事浓度(E4: CS≫1X2≈O/U)",
+  "parents": [],
+  "gen": 0,
+  "fitness": 0.6,
+  "novelty": 0.787,
+  "status": "open"
+ },
+ {
+  "id": "P003",
+  "text": "叙事税沿期限强正相关递增且协议税∝叙事浓度的复合结构(E4×E5杂交)",
+  "parents": [
+   "P001",
+   "P002"
+  ],
+  "gen": 1,
+  "fitness": 0.3,
+  "novelty": 0.748,
+  "status": "raw-need-distill"
+ }
+]

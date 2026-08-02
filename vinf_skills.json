@@ -1,0 +1,37 @@
+{
+  "proof_strategies": [
+    {
+      "name": "凸性+驻点",
+      "applies_to": "ineq_min_zero",
+      "provers": [
+        "sympy"
+      ],
+      "success_rate": 0.85
+    },
+    {
+      "name": "反证+SMT",
+      "applies_to": "sup_mean",
+      "provers": [
+        "z3"
+      ],
+      "success_rate": 0.9
+    },
+    {
+      "name": "网格数值证书",
+      "applies_to": "grid_nonneg",
+      "provers": [
+        "numeric"
+      ],
+      "success_rate": 0.75
+    }
+  ],
+  "cross_validation": {
+    "threshold": 0.5,
+    "methods": [
+      "sympy",
+      "z3",
+      "numeric"
+    ]
+  },
+  "last_updated": "2026-07-23 14:08:04"
+}

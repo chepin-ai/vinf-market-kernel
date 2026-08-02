@@ -1,0 +1,26 @@
+{
+  "established": [
+    "T1",
+    "T2",
+    "T8",
+    "T9",
+    "T13",
+    "T15",
+    "T20",
+    "T21",
+    "T26",
+    "AX-MAX",
+    "GIBBS-2",
+    "SORRY-T1",
+    "RENYI-MONO"
+  ],
+  "axiom_candidates": [
+    "T29"
+  ],
+  "open": [
+    "T31"
+  ],
+  "refuted": [],
+  "frontier_count": 32,
+  "last_updated": "2026-07-23 14:08:04"
+}

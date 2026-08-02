@@ -1,0 +1,17 @@
+{
+  "version": "v∞-ch44",
+  "axioms": [
+    "A2′: 命题状态只由代码改变",
+    "T9: LLM只提案不判决"
+  ],
+  "budget": {
+    "llm_per_tick": 12,
+    "llm_per_session": 25
+  },
+  "governance": {
+    "seed_protection": "禁止状态缺失时另起Kernel0",
+    "chain_integrity": "journal39.jsonl只增不减",
+    "key_rotation": "暴露密钥立即轮换"
+  },
+  "last_updated": "2026-07-23 14:08:04"
+}
