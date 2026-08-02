@@ -1,15 +1,15 @@
 {
-  "ts": "2026-08-02 23:17:07",
+  "ts": "2026-08-03 02:24:45",
   "results": [
     [
       "T1_chain_integrity",
       "PASS",
-      "17 hops"
+      "19 hops"
     ],
     [
       "T2_monotonic_db",
       "PASS",
-      "{'theorems': 21, 'predictions': 6, 'frontier': 39}"
+      "{'theorems': 21, 'predictions': 6, 'frontier': 43}"
     ],
     [
       "T3_cell_complex",
