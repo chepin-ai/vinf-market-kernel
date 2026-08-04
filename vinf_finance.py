@@ -54,13 +54,26 @@ class FinanceEngine:
 
     def F4_d3_dispersion(self):
         f = os.path.join(self.wd, 'worldcup_2026_odds_snapshot.csv')
-        if not os.path.exists(f): return ('F4', 'skip', 'sharpapi快照缺席(历史资产)')
+        if not os.path.exists(f):
+            # 历史资产已归档(赛事完赛, 快照不回流): 报archived而非skip——不再制造告警噪声
+            return ('F4', 'archived', 'sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活')
+        # D3派生(第54章落实): 高协议税市场(player_props/得分手类)逐庄sup-mean离散度 > 低税市场(冠军/胜负/总分)
         d = pd.read_csv(f)
-        # 高税市场(CS类)vs主线(1X2)的逐庄价格sup-mean离散度
-        disp = {}
-        for mkt, g in d.groupby(d.columns[1] if len(d.columns)>1 else d.columns[0]):
-            pass
-        return ('F4', 'skip', '面板结构需逐庄价格列, 留待专项')
+        d = d[d['odds_probability'].between(0.001, 0.999)]
+        hi = d.market_type.str.contains('player|scorer|score', case=False, regex=True)
+        def disp(g):
+            p = g['odds_probability']
+            return (p.max() - p.mean()) / max(p.mean(), 1e-9)
+        g = d.groupby(['market_type', 'event_id', 'selection'])
+        dd = g.filter(lambda x: len(x) >= 3).groupby(['market_type', 'event_id', 'selection']).apply(disp)
+        out = pd.DataFrame({'disp': dd})
+        out['hi'] = [i[0] for i in out.index]
+        out['hi'] = out['hi'].str.contains('player|scorer|score', case=False, regex=True)
+        med_hi, med_lo = out[out.hi]['disp'].median(), out[~out.hi]['disp'].median()
+        ratio = med_hi / max(med_lo, 1e-9)
+        ok = bool(ratio > 1.2 and med_hi > 0)
+        return ('F4', 'pass' if ok else 'fail',
+                f'高税市场离散度中位={med_hi:.2f} vs 低税={med_lo:.2f} (×{ratio:.1f}) — D3派生{"成立" if ok else "证伪"}')
 
     def refresh_fred(self):
         """增量刷新VIX/SPX（免钥FRED），供后续tick的VRP滚动检验"""

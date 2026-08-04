@@ -1,24 +1,24 @@
 {
  "status": {
-  "ts": "2026-08-05 01:42:15",
+  "ts": "2026-08-05 01:55:50",
   "chain": {
    "ok": true,
-   "hops": 38,
-   "tail": "325f8a70929f"
+   "hops": 39,
+   "tail": "e412e7f2d5a7"
   },
   "db": {
    "theorems": 24,
    "predictions": 6,
    "assets": 0,
    "debts": 9,
-   "frontier": 47
+   "frontier": 67
   },
-  "last_tick": "2026-08-05 01:42:02",
+  "last_tick": "2026-08-05 01:55:49",
   "finance": [
-   "[fin:F4] skip — sharpapi快照缺席(历史资产)",
-   "[fin:F3] skip — 缺数据",
-   "[fin:F2] skip — 缺数据",
-   "[fin:F1] skip — vrp_ladder.csv缺席"
+   "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立"
   ],
   "sorries": [
    "AX-MAX:proved",
@@ -280,7 +280,7 @@
     "rel": "evolves"
    }
   ],
-  "built": "2026-08-05 01:42:15"
+  "built": "2026-08-05 01:55:50"
  },
  "cell_complex": {
   "V": 32,
@@ -530,6 +530,150 @@
  ],
  "frontier": [
   {
+   "id": 89,
+   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 88,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 87,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 86,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 85,
+   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 84,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 83,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 82,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 81,
+   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 80,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 79,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 78,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 77,
+   "finding": "[fin:F4] skip — 面板结构需逐庄价格列, 留待专项",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 76,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 75,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 74,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 73,
+   "finding": "[fin:F4] skip — 面板结构需逐庄价格列, 留待专项",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 72,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 71,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 70,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 69,
+   "finding": "[fin:F4] skip — 面板结构需逐庄价格列, 留待专项",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 68,
+   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 67,
+   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 66,
+   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
    "id": 65,
    "finding": "[fin:F4] skip — sharpapi快照缺席(历史资产)",
    "source": "finance_engine",
@@ -624,150 +768,6 @@
    "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
    "source": "finance_engine",
    "round": 40
-  },
-  {
-   "id": 49,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 48,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 46,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 45,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 44,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 39,
-   "finding": "[zkp] 零知识证明引擎实现: 基于Schnorr协议的简化ZKP验证器，支持Prover-Verifier三轮交互，transcript不泄露秘密",
-   "source": "vinf_zkp.py",
-   "round": 44
-  },
-  {
-   "id": 30,
-   "finding": "[fix] 看门狗代码评审: vinf_console WORK硬编码→VINF_WORK环境变量+脚本目录回退(修复新沙箱verify误报)",
-   "source": "watchdog",
-   "round": 40
-  },
-  {
-   "id": 29,
-   "finding": "[sync] 手机端心跳(5跳尾ab0a99ac47d8)无写权限, 增量经人并轨: 债#1closed+前沿2条; 其本地5dbbb6a未推送, 以本库为链上正本",
-   "source": "human-merge",
-   "round": 40
-  },
-  {
-   "id": 28,
-   "finding": "[前沿] FoF1 2026: 早盘ΔVIX预测方差资产收益(t=6.1, Sharpe>2, 控制VRP后仍显著) → F1/F2日内信号增强路径",
-   "source": "heartbeat-mobile",
-   "round": 40
-  },
-  {
-   "id": 27,
-   "finding": "[前沿] arXiv:2605.00864 Polymarket NBA套利实证: 75M订单簿快照, 单场套利窗口中位3s, 组合套利中位101bp但76.9%机会可执行量≤14.8份 → 直接支持Pred8(套利窗口<10s@2028)",
-   "source": "heartbeat-mobile",
-   "round": 40
-  },
-  {
-   "id": 26,
-   "finding": "[closure:T31∧T9] 派生预测D4: 最优实验设计=最大化区分器优势的挑战选择(实验=T9区分器对偶); 可证伪性=ZKP soundness误差界",
-   "source": "kb_closure",
-   "round": 41
-  },
-  {
-   "id": 25,
-   "finding": "[fin:F4] skip — 面板结构需逐庄价格列, 留待专项",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 21,
-   "finding": "[bench] 代码生成: 推理型模型直出代码不可靠(6/6失败); 权威证书走内置证明器,LLM做路线设计(flash两次推对r/(r-1)但未直出)",
-   "source": "v39",
-   "round": 39
-  },
-  {
-   "id": 20,
-   "finding": "[bench] 证伪基准: pro 4/4全对; kimi锋利但冗长; flash不稳→R2不对称权重新证据",
-   "source": "v39",
-   "round": 39
-  },
-  {
-   "id": 19,
-   "finding": "[forge] E5严格单调版被证伪→精化为秩相关表述: 测试驱动机制抓出措辞过度",
-   "source": "v39",
-   "round": 39
-  },
-  {
-   "id": 18,
-   "finding": "[sorry] RENYI-MONO → certified(半形式): 闭式+数值证书; 可积域边界a<r/(r-1)内禀爆炸=L7 sup端发散的高斯例证",
-   "source": "v39",
-   "round": 39
-  },
-  {
-   "id": 17,
-   "finding": "[closure:T26∧E4] 派生预测D3: CS市场的高税应有更大的逐庄sup-mean离散度(协议税∝分歧聚合强度)——可用sharpapi面板检",
-   "source": "kb_closure",
-   "round": 39
-  },
-  {
-   "id": 16,
-   "finding": "[closure:T13∧E5] 派生推论D2: 长端期权叙事税>0是T13在衍生品的稳态形式；短端转负不违T13(T13断言的是定价核非负,非任意窗IV-RV)",
-   "source": "kb_closure",
-   "round": 39
-  },
-  {
-   "id": 15,
-   "finding": "[closure:E4∧E5] 派生预测D1: 高叙事浓度市场(CS/长赛程)的协议税应同时高于主线市场且随期限放大——税率排序×期限斜率复合可检",
-   "source": "kb_closure",
-   "round": 39
-  },
-  {
-   "id": 14,
-   "finding": "[forge] T26-direction → pass ",
-   "source": "test_forge",
-   "round": 39
-  },
-  {
-   "id": 13,
-   "finding": "[forge] T1-sup-mean → pass ",
-   "source": "test_forge",
-   "round": 39
-  },
-  {
-   "id": 12,
-   "finding": "[forge] E5-monotone → fail VRP_post序列=[-0.007, -0.011, -0.005, 0.013, 0.034]",
-   "source": "test_forge",
-   "round": 39
-  },
-  {
-   "id": 11,
-   "finding": "[sorry] GIBBS-2 → proved by sympy: 凸函数+驻点处值为0 ⟹ expr≥0（凸性经符号化简+2001点数值证书双确认）",
-   "source": "vinf_resolver",
-   "round": 39
-  },
-  {
-   "id": 10,
-   "finding": "[sorry] AX-MAX → proved by z3: maxitive代数四公理全部成立",
-   "source": "vinf_resolver",
-   "round": 39
   }
  ],
  "debts": [
@@ -1293,6 +1293,18 @@
    ],
    "prev_hash": "67318f3393738a7a72b2ae2d1e49d6d5128babe384905ed6c5863d6b4447b604",
    "hash": "325f8a70929fc9455cee88eaef1ff3c6f64429240d0489ec304f745510ccfd4c"
+  },
+  {
+   "tick": 1785866149,
+   "ts": "2026-08-05 01:55:49",
+   "actions": [
+    "rootfix: 金融四检\"缺席\"假象根治——status()由读frontier历史改为现场重跑(vinf_console), F1-F3即刻pass",
+    "feature: F4-D3检验真正落实(不再stub)——sharpapi面板高税市场离散度0.58vs低税0.44(×1.3)D3派生成立, 快照入Git供CI复算",
+    "engine: 医官vinf_doctor自检/自验证/自修复(6面巡检+静默修复+遗留登记); 命令注册表vinf_commands(RUN<CMD>粘贴回会话即确定性执行,command_log留痕)",
+    "data: vinf_refresh_cn多源容灾+多日分块策略(iFinD≤3码/次≤1095d→分块循环,增量10日成本恒定,全失败保留本地如实报告)"
+   ],
+   "prev_hash": "325f8a70929fc9455cee88eaef1ff3c6f64429240d0489ec304f745510ccfd4c",
+   "hash": "e412e7f2d5a7a422c8dfee010f5e443f829e3dff58b76bdbd36593de4696976d"
   }
  ],
  "policy": {
@@ -2780,35 +2792,64 @@
    "E5"
   ]
  },
- "ontology": {
-  "audit": {
-   "triples": 360,
-   "parse_ok": true,
-   "contradictions": [],
-   "warnings": [
-    "孤儿定理×14: T2,T5,T6,T16,T17,T20"
-   ]
-  },
-  "ttl_file": "kg.ttl"
- },
  "reasoner": {
-  "ts": "2026-08-05 01:39:30",
+  "ts": "2026-08-05 01:55:02",
   "deductions": [],
   "topology": {
    "ok": true,
-   "V": 31,
+   "V": 32,
    "E": 10,
    "F": 3,
-   "chi": 24,
+   "chi": 25,
    "betti": [
-    22,
+    23,
     1
    ],
    "betti2_implied": 3,
-   "note": "χ=24=β0-β1+β2 → β2=3(反解)"
+   "note": "χ=25=β0-β1+β2 → β2=3(反解)"
   },
   "sympy_xval": [],
   "contradictions": [],
   "emergent": []
+ },
+ "doctor": {
+  "ts": "2026-08-05 01:55:01",
+  "checks": [
+   {
+    "name": "链完整性",
+    "ok": true,
+    "note": "38跳 尾325f8a70929f"
+   },
+   {
+    "name": "金融状态新鲜度",
+    "ok": true,
+    "note": "status与文件一致"
+   },
+   {
+    "name": "CN系时效",
+    "ok": true,
+    "note": "沪深300最新2026-08-04 (1d)"
+   },
+   {
+    "name": "状态包新鲜度",
+    "ok": true,
+    "note": "bundle 0.2h前"
+   },
+   {
+    "name": "本体回读",
+    "ok": true,
+    "note": "  警告: 孤儿定理×14: T2,T5,T6,T16,T17,T20"
+   },
+   {
+    "name": "推理机",
+    "ok": true,
+    "note": "推演 0 · 矛盾 0 · sympy复核 0 · 涌现注入 0"
+   }
+  ],
+  "repairs": [],
+  "open_issues": [
+   "标普500失联18d — 源链Yahoo/FRED/Stooq均不可达处, 台账债#7/#8跟踪",
+   "VIX失联18d — 源链Yahoo/FRED/Stooq均不可达处, 台账债#7/#8跟踪"
+  ]
  }
 }

@@ -1,23 +1,23 @@
 {
- "ts": "2026-08-05 01:42:15",
+ "ts": "2026-08-05 01:55:50",
  "chain": {
   "ok": true,
-  "hops": 38,
-  "tail": "325f8a70929f"
+  "hops": 39,
+  "tail": "e412e7f2d5a7"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
   "debts": 9,
-  "frontier": 47
+  "frontier": 67
  },
- "last_tick": "2026-08-05 01:42:02",
+ "last_tick": "2026-08-05 01:55:49",
  "finance": [
-  "[fin:F4] skip — sharpapi快照缺席(历史资产)",
-  "[fin:F3] skip — 缺数据",
-  "[fin:F2] skip — 缺数据",
-  "[fin:F1] skip — vrp_ladder.csv缺席"
+  "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
+  "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
+  "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
+  "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立"
  ],
  "sorries": [
   "AX-MAX:proved",

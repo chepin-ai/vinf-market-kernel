@@ -91,7 +91,13 @@ def status(write=True):
     db = _db()
     chain = verify_chain()
     s = db.summary()
-    fin = db.query("SELECT finding FROM frontier WHERE finding LIKE '[fin:%' ORDER BY id DESC LIMIT 4")
+    # 金融四检现场重跑(第54章修正: 不再信frontier历史——历史滞后曾制造"缺席"假象)
+    try:
+        from vinf_finance import FinanceEngine
+        fin = [(f"[fin:{r['fid']}] {r['verdict']} — {r.get('detail','')}")
+               for r in FinanceEngine(db).run_all()]
+    except Exception:
+        fin = [f[0] for f in db.query("SELECT finding FROM frontier WHERE finding LIKE '[fin:%' ORDER BY id DESC LIMIT 4")]
     sorries = db.query("SELECT id, status FROM theorems WHERE kind='sorry-resolution' OR status IN ('open','axiom_candidate')")
     debts = db.query("SELECT item, status FROM debts")
     last_tick = None
@@ -101,7 +107,7 @@ def status(write=True):
         if lines:
             last_tick = json.loads(lines[-1])['ts']
     st = dict(ts=time.strftime('%Y-%m-%d %H:%M:%S'), chain=chain, db=s,
-              last_tick=last_tick, finance=[f[0] for f in fin],
+              last_tick=last_tick, finance=[x if isinstance(x, str) else x[0] for x in fin],
               sorries=[f'{a}:{b}' for a, b in sorries],
               debts=[f'{a}:{b}' for a, b in debts])
     if write:

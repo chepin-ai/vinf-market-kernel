@@ -49,6 +49,15 @@ def main():
     except Exception as e:
         acts.append(f"ontology/reasoner: ERROR {type(e).__name__}: {str(e)[:60]}")
 
+    # 2.6 医官自检/自修复(第54章)
+    try:
+        import vinf_doctor as vd
+        drep = vd.Doctor().run()
+        ok_n = sum(1 for c in drep['checks'] if c['ok'])
+        acts.append(f"doctor: {ok_n}/{len(drep['checks'])}健康 修复{len(drep['repairs'])} 遗留{len(drep['open_issues'])}")
+    except Exception as e:
+        acts.append(f"doctor: ERROR {type(e).__name__}: {str(e)[:60]}")
+
     # 3 状态与bundle
     st = vc.status(write=True)
     acts.append(f"status: chain=ok tail={st['chain'].get('tail')}")
