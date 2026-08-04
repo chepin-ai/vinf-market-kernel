@@ -11,24 +11,49 @@ os.environ['VINF_WORK'] = WORK
 os.chdir(WORK)
 
 FRED = 'https://fred.stlouisfed.org/graph/fredgraph.csv?id={}'
+YAHOO = 'https://query1.finance.yahoo.com/v8/finance/chart/{}?period1=1451606400&period2={}&interval=1d'
+UA = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/126 Safari/537.36'}
+TICKER = {'SP500': '%5EGSPC', 'VIXCLS': '%5EVIX'}
 
 
-def fetch(series):
-    last = None
-    for attempt in range(4):
-        try:
-            req = urllib.request.Request(FRED.format(series), headers={'User-Agent': 'Mozilla/5.0'})
-            raw = urllib.request.urlopen(req, timeout=90).read().decode()
-            break
-        except Exception as e:
-            last = e; time.sleep(15 * (attempt + 1))
-    else:
-        raise last
-    d = pd.read_csv(io.StringIO(raw))
+def _parse(d):
     d.columns = ['d', 'v']
     d['d'] = pd.to_datetime(d['d'])
     d['v'] = pd.to_numeric(d['v'], errors='coerce')
     return d.dropna()
+
+
+def _fred(series):
+    raw = urllib.request.urlopen(urllib.request.Request(FRED.format(series), headers=UA), timeout=90).read().decode()
+    return _parse(pd.read_csv(io.StringIO(raw)))
+
+
+def _yahoo(series):
+    import json as _json
+    raw = urllib.request.urlopen(urllib.request.Request(
+        YAHOO.format(TICKER[series], int(time.time())), headers=UA), timeout=90).read().decode()
+    r = _json.loads(raw)['chart']['result'][0]
+    ts = r['timestamp']; cl = r['indicators']['quote'][0]['close']
+    return _parse(pd.DataFrame({'d': pd.to_datetime(ts, unit='s').date, 'v': cl}))
+
+
+def fetch(series):
+    """多源容灾: FRED → Yahoo; 皆败则回退本地CSV(数据不更新但回测照跑)"""
+    for src in (_fred, _yahoo):
+        for attempt in range(2):
+            try:
+                return src(series)
+            except Exception as e:
+                print(f"  fetch {series} via {src.__name__}#{attempt+1}: {type(e).__name__}")
+                time.sleep(10 * (attempt + 1))
+    print(f"  FALLBACK: 使用本地既有{series}数据")
+    if series == 'SP500' and os.path.exists('spx_fred.csv'):
+        d = pd.read_csv('spx_fred.csv'); d.columns = ['d', 'v']
+        return _parse(d)
+    if os.path.exists('vix_hist.csv'):
+        d = pd.read_csv('vix_hist.csv')[['DATE', 'CLOSE']]; d.columns = ['d', 'v']
+        return _parse(d)
+    raise RuntimeError(f'{series}: 所有源失败且无本地备份')
 
 
 def main():
@@ -41,9 +66,9 @@ def main():
     print(f"data: SPX→{spx['d'].iloc[-1].date()} {spx['v'].iloc[-1]:.0f}, VIX→{vix['d'].iloc[-1].date()} {vix['v'].iloc[-1]:.2f}")
 
     # T33回测(首破准则, 与第45章同一代码路径)
-    df = spx.merge(vix, on='d').sort_values('d').reset_index(drop=True)
+    df = spx.rename(columns={'v': 's'}).merge(vix, on='d').sort_values('d').reset_index(drop=True)
     df['ym'] = df['d'].dt.to_period('M')
-    df['ret0'] = df.groupby('ym')['v_x' if 'v_x' in df else 'v'].transform(lambda s: s / s.iloc[0] - 1)
+    df['ret0'] = df.groupby('ym')['s'].transform(lambda s: s / s.iloc[0] - 1)
     br = df.groupby('ym').agg(breach=('ret0', lambda x: x.abs().max()), v0=('v', 'first')).dropna()
     br['sig'] = br['v0'] / 100 * np.sqrt(1 / 12)
     br['payoff'] = (br['breach'] - 0.5 * br['sig']).clip(lower=0)

@@ -18,6 +18,8 @@ TRACKED = [
     'theory_db.sqlite', 'journal39.jsonl', 'pool.json',
     'vrp_ladder.csv', 'dalpha_ladder.csv', 'dalpha_trimmed.csv',
     'heartbeat_status.json', 'kg.json', 'STATUS.md', 'state_bundle.json', 'strategies.json',
+    'spx_fred.csv', 'vix_hist.csv', 'WATCHDOG.md', 'README.md',
+    'ci_tick.py', 'ci_finance.py', 'ci_watchdog.py',
     'vinf_kg.py', 'vinf_sync.py',
 ]
 
@@ -79,7 +81,7 @@ def init_repo():
         f.write('vinf_keys.json\nspypart_*\n*.zip\n__pycache__/\n*.png\n'
                 'cs2_*.csv\nnewest_ts_ds.csv\nucl_30k_matches.csv\n'
                 'worldcup_2026_odds_snapshot.csv\nwc2026*.xlsx\ngspc*.csv\n'
-                'spx_*.csv\nvix*.csv\nspy_*.csv\nhistorical_matches*.csv\nepl_*.csv\n')
+                 'spy_*.csv\nhistorical_matches*.csv\nepl_*.csv\n')
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else 'backup'

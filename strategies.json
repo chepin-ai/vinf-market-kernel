@@ -1,10 +1,15 @@
 {
   "meta": {
     "title": "v∞ 策略台账（T33 彩票-期权对偶实证）",
-    "data": "SPX(FRED) + VIX, 2016-07 ~ 2026-07, 月度调仓",
+    "data": "SPX(FRED)+VIX, 2016-07-18 ~ 2026-07-17, 月度调仓(CI日更)",
     "method": "0.5σ 宽跨, 公允权利金 0.40σ(正态首破期望), 兑付按月内首破幅度, pnl 以 σ 为单位",
     "updated": "2026-08-04",
-    "theorems": ["T32", "T33", "E5", "F3"]
+    "theorems": [
+      "T32",
+      "T33",
+      "E5",
+      "F3"
+    ]
   },
   "strategies": [
     {
@@ -14,7 +19,13 @@
       "verdict": "内核主推",
       "rule": "仅当 VIX 处于滚动 3 年最低三分位时，买入月度 0.5σ 双侧翼（strangle wings）；持有到期，不追仓",
       "rationale": "T33-P2：低波入场=回卷 θ₀，票据处于正确同伦类；平时小额流血是权利金，制度切换时兑付",
-      "metrics": {"cum_pnl": 1.4, "max_dd": 1.1, "worst_month": -0.40, "best_month": 1.02, "unit": "σ"},
+      "metrics": {
+        "cum_pnl": 1.4,
+        "max_dd": 1.1,
+        "worst_month": -0.4,
+        "best_month": 1.02,
+        "unit": "σ"
+      },
       "risk": "最长连续流血期可达数年；仓位须使 10×最差月仍可承受",
       "kernel_opinion": "收益/回撤比 1.27 为三策略最优；回撤减半、收益近两倍于随机入场——基点条件是不可省略的"
     },
@@ -25,7 +36,12 @@
       "verdict": "T33 涌现推论",
       "rule": "85~90% 安全基点（短债/货币）+ 10~15% 尾部环（基点入场买入虚值翼）；剪去全部中等风险中间胞",
       "rationale": "T33 涌现：剪去可消去对（中等风险中等收益），重押两端（安全基点=回卷锚，尾部环=本质胞）",
-      "metrics": {"cum_pnl": null, "max_dd": null, "note": "组合层构造，参数以 S2 票据腿实测为准", "unit": "—"},
+      "metrics": {
+        "cum_pnl": null,
+        "max_dd": null,
+        "note": "组合层构造，参数以 S2 票据腿实测为准",
+        "unit": "—"
+      },
       "risk": "票据腿全损概率高；安全腿收益率决定总底仓漂移",
       "kernel_opinion": "这是 T32 在组合构造上的直接推论：保持同伦型的极小子复形，无需额外假设"
     },
@@ -36,7 +52,13 @@
       "verdict": "有条件启用",
       "rule": "卖出 180d 平值跨式税（VRP 长端恒正 +3.43 vol 点, t=8.1, 命中率 68%），同时以 S2 票据腿对冲尾部；短端(<30d)不做——负税期收割面在对面",
       "rationale": "E5/F1-F2：VRP 沿期限秩相关 0.90，长端恒正；但必须用票据封顶尾部（T33-P1 教训）",
-      "metrics": {"vrp_long": 3.43, "t_stat": 8.1, "hit_rate_long": 0.68, "hit_rate_all": 0.63, "unit": "vol点"},
+      "metrics": {
+        "vrp_long": 3.43,
+        "t_stat": 8.1,
+        "hit_rate_long": 0.68,
+        "hit_rate_all": 0.63,
+        "unit": "vol点"
+      },
       "risk": "无票据对冲的裸卖= S1 的命运（回撤 8.2σ）；危机月 IV 暴涨时逐日盯市亏损可超权利金数倍",
       "kernel_opinion": "收割面最稳在 180d，但内核只批准'收割+票据'的组合体，永不裸奔"
     },
@@ -47,7 +69,13 @@
       "verdict": "内核禁止",
       "rule": "（反面教材）恒定卖出 0.5σ 宽跨翼收取权利金",
       "rationale": "T33-P1：被剪枝网络——类内稳赚小钱，类外崩溃",
-      "metrics": {"cum_pnl": -2.8, "max_dd": 8.2, "worst_month": -3.53, "best_month": 0.65, "unit": "σ"},
+      "metrics": {
+        "cum_pnl": -2.6,
+        "max_dd": 8.2,
+        "worst_month": -3.52,
+        "best_month": 0.65,
+        "unit": "σ"
+      },
       "risk": "2020-03 单月 -3.53σ；最好月与最差月不对称 5.4 倍（≈D∞/D1=7.3 的 sup 主导签名）",
       "kernel_opinion": "十年累计为负。任何'稳定收租'话术都是收缩不存在于类外的数学事实"
     },
@@ -58,7 +86,13 @@
       "verdict": "仅作基准",
       "rule": "随机 1/3 月份买入同样的翼（打乱入场基点）",
       "rationale": "T33-P2 对照组：破坏基点条件",
-      "metrics": {"cum_pnl": 0.8, "max_dd": 2.4, "worst_month": -0.53, "best_month": 1.02, "unit": "σ"},
+      "metrics": {
+        "cum_pnl": -2.2,
+        "max_dd": 4.3,
+        "worst_month": -0.65,
+        "best_month": 0.75,
+        "unit": "σ"
+      },
       "risk": "相对 S2：收益减半、回撤翻倍",
       "kernel_opinion": "同一份票据，换基点即退化——rewind vs. reinit 在真实市场的复现"
     },
@@ -69,7 +103,11 @@
       "verdict": "入场计时器",
       "rule": "追踪 D_α 阶梯倍数（当前中位 7.3×）：倍数↑=市场拒绝剪枝尾部=票据变贵→推迟票据腿建仓，等基点回归",
       "rationale": "T33 拓展1：D∞/D1 重读为市场的收缩拒绝度；陡度∝叙事浓度(ρ=0.749)",
-      "metrics": {"dinf_over_d1": 7.3, "ladder_monotone": true, "unit": "倍"},
+      "metrics": {
+        "dinf_over_d1": 7.3,
+        "ladder_monotone": true,
+        "unit": "倍"
+      },
       "risk": "n=29 功效不足（二分 MWU p=0.34），只作辅助不作触发",
       "kernel_opinion": "这是票据的价格标签：贵时不买，便宜（低 VIX 基点）时必买"
     }
