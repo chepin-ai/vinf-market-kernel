@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-05 02:49:26",
+ "updated": "2026-08-04 20:37:34",
  "assets": {
   "CN300": {
    "last": 4600.9304,
@@ -11,7 +11,7 @@
    "rv_pct3y": 96.6931216931217,
    "name": "沪深300",
    "market": "CN",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "CNSH": {
@@ -24,7 +24,7 @@
    "rv_pct3y": 83.33333333333334,
    "name": "上证综指",
    "market": "CN",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "HK": {
@@ -37,7 +37,7 @@
    "rv_pct3y": 84.14464534075104,
    "name": "腾讯(港股代理)",
    "market": "HK",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "HSI": {
@@ -50,7 +50,7 @@
    "rv_pct3y": 47.54797441364605,
    "name": "恒生指数",
    "market": "HK",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 2
   },
   "SPX": {
@@ -63,7 +63,7 @@
    "rv_pct3y": 77.38095238095238,
    "name": "标普500",
    "market": "US",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "VIX": {
@@ -76,7 +76,7 @@
    "rv_pct3y": 73.80952380952381,
    "name": "VIX",
    "market": "US",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "US10Y": {
@@ -89,7 +89,7 @@
    "rv_pct3y": 14.153439153439153,
    "name": "美债10Y",
    "market": "US",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 0
   },
   "CNY": {
@@ -98,11 +98,11 @@
    "chg1d": -0.201452739925434,
    "mom20": -0.5799380352979444,
    "mom60": -0.7878317856511718,
-   "rv20": 1.2883581120405097,
+   "rv20": 1.2883581120404544,
    "rv_pct3y": 13.624338624338625,
    "name": "美元/离岸人民币",
    "market": "FX",
-   "source": "local(无新数据)",
+   "source": "local",
    "stale_days": 1
   },
   "GOLD": {
@@ -137,14 +137,14 @@
   "SPX": "中性区(分位77%): 长端收割+票据组合体可运行, 仓位随分位递增递减"
  },
  "sources": {
-  "CN300": "local(无新数据)",
-  "CNSH": "local(无新数据)",
-  "HK": "local(无新数据)",
-  "HSI": "local(无新数据)",
-  "SPX": "local(无新数据)",
-  "VIX": "local(无新数据)",
-  "US10Y": "local(无新数据)",
-  "CNY": "local(无新数据)",
+  "CN300": "local",
+  "CNSH": "local",
+  "HK": "local",
+  "HSI": "local",
+  "SPX": "local",
+  "VIX": "local",
+  "US10Y": "local",
+  "CNY": "local",
   "GOLD": "local"
  },
  "rotation": {
@@ -225,6 +225,10 @@
    }
   ],
   "nav_history": [
+   {
+    "date": "2026-08-04",
+    "nav": 1.0
+   },
    {
     "date": "2026-08-04",
     "nav": 1.0
@@ -849,8 +853,8 @@
  "engines": {
   "heartbeat": {
    "expect": "每6h",
-   "last": "2026-08-05 02:08:47",
-   "chain_hops": 40,
+   "last": "2026-08-04 20:29:17",
+   "chain_hops": 47,
    "note": "Actions心跳/手机验证者共用协议"
   },
   "watchdog": {
@@ -865,7 +869,7 @@
   },
   "market_pulse": {
    "expect": "交易日2次",
-   "last": "2026-08-05 02:49:26",
+   "last": "2026-08-04 20:37:34",
    "note": "本脉搏+虚拟盘记账"
   },
   "phone_verifier": {
