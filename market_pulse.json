@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-04 21:24:29",
+ "updated": "2026-08-04 13:40:40",
  "assets": {
   "CN300": {
    "last": 4543.1781,
@@ -15,9 +15,17 @@
    "stale_days": 1
   },
   "CNSH": {
+   "last": 3809.6629,
+   "date": "2026-08-03",
+   "chg1d": -0.5897169254380996,
+   "mom20": -5.730305627616805,
+   "mom60": -8.858701357460442,
+   "rv20": 21.093193143728712,
+   "rv_pct3y": 88.62433862433863,
    "name": "上证综指",
    "market": "CN",
-   "status": "absent"
+   "source": "local",
+   "stale_days": 1
   },
   "HK": {
    "last": 490.4,
@@ -88,6 +96,7 @@
  },
  "sources": {
   "CN300": "local",
+  "CNSH": "local",
   "HK": "local",
   "SPX": "local",
   "VIX": "local"
