@@ -7,11 +7,7 @@ import os, subprocess, sys, shutil
 
 REPO_URL = 'https://{token}@github.com/chepin-ai/vinf-market-kernel.git'
 REPO_DIR = '/tmp/vinf_repo'
-# 看门狗路径纪律
-_DEFAULT_WORK = '/mnt/agents/work/worldcup2026'
-WORK = os.environ.get('VINF_WORK') or (
-    _DEFAULT_WORK if os.path.isdir(_DEFAULT_WORK)
-    else os.path.dirname(os.path.abspath(__file__)))
+WORK = '/mnt/agents/work/worldcup2026'
 
 # 纳入版本管理的状态文件（密钥与大数据永不出境）
 TRACKED = [
@@ -56,9 +52,8 @@ def backup(msg='heartbeat tick'):
     os.makedirs(REPO_DIR, exist_ok=True)
     for f in TRACKED:
         src = os.path.join(WORK, f)
-        dst = os.path.join(REPO_DIR, f)
-        if os.path.exists(src) and os.path.realpath(src) != os.path.realpath(dst):
-            shutil.copy2(src, dst)
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(REPO_DIR, f))
     _git('add', '-A')
     if not _git('status', '--porcelain'):
         return 'no-change'

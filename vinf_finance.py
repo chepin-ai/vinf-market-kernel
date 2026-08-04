@@ -9,11 +9,7 @@ import os, json, time, urllib.request
 import numpy as np
 import pandas as pd
 
-# 看门狗路径纪律: 新沙箱无/mnt路径时回退脚本目录, 可用VINF_WORK覆盖
-_DEFAULT_WORK = '/mnt/agents/work/worldcup2026'
-WORK = os.environ.get('VINF_WORK') or (
-    _DEFAULT_WORK if os.path.isdir(_DEFAULT_WORK)
-    else os.path.dirname(os.path.abspath(__file__)))
+WORK = '/mnt/agents/work/worldcup2026'
 
 def _fred(series, path):
     url = f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}'
