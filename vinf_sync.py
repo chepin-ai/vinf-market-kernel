@@ -22,6 +22,12 @@ TRACKED = [
     'spx_fred.csv', 'vix_hist.csv', 'csi300.csv', 'shcomp.csv', 'tencent_hk.csv', 'market_pulse.json', 'vinf_market.py', 'ci_market.py', 'WATCHDOG.md', 'README.md',
     'ci_tick.py', 'ci_finance.py', 'ci_watchdog.py',
     'vinf_kg.py', 'vinf_sync.py',
+    'engine.py', 'test_engine.py', 'selftest_report.json', 'agents_registry.json',
+    'ENGINE.md', 'vinf_doctor.py', 'vinf_commands.py', 'vinf_refresh_cn.py',
+    'doctor_report.json', 'worldcup_2026_odds_snapshot.csv',
+    '.github/workflows/heartbeat.yml', '.github/workflows/finance-daily.yml',
+    '.github/workflows/watchdog.yml', '.github/workflows/market-pulse.yml',
+    '.github/workflows/selftest.yml',
 ]
 
 def _git(*args, cwd=REPO_DIR, check=True):

@@ -1,0 +1,18 @@
+{
+ "version": "1.0",
+ "updated": "2026-08-05",
+ "principle": "提案层自由涌现, 验证层代码独裁(A2/T9); 泳道隔离, 预算制",
+ "agents": [
+  {"id": "scout",    "lane": "检索",   "model": "kimi/k2.6",     "role": "前沿检索与提案采集", "budget": "按心跳", "writes": "pool(raw)"},
+  {"id": "prover",   "lane": "立论",   "model": "deepseek/pro",  "role": "命题形式化与证明草图", "budget": "≤4/轮", "writes": "pool(distilled)"},
+  {"id": "falsifier_sharp", "lane": "证伪", "model": "kimi/k2.6", "role": "锐利证伪(找反例/攻击假设)", "budget": "≤4/轮", "writes": "frontier(verdict-candidate)"},
+  {"id": "falsifier_deep",  "lane": "证伪", "model": "deepseek/pro", "role": "深度证伪(循环定义/偷换概念)", "budget": "≤2/轮", "writes": "frontier(verdict-candidate)"},
+  {"id": "triage",   "lane": "分流",   "model": "deepseek2/flash", "role": "提案分流与去重", "budget": "≤6/轮", "writes": "pool(meta)"},
+  {"id": "verifier_code", "lane": "判决", "model": null, "role": "代码判决: z3/sympy/numpy/backtest — 命题状态唯一合法变更者", "budget": "无(LLM豁免)", "writes": "theorems.status"},
+  {"id": "reasoner", "lane": "推演",   "model": null, "role": "前向链/拓扑审计/符号交叉验证/涌现注入", "budget": "每心跳", "writes": "pool(raw-need-distill), reasoner_report"},
+  {"id": "doctor",   "lane": "医疗",   "model": null, "role": "六面自检/静默自修复/遗留登记", "budget": "每心跳", "writes": "doctor_report, status"},
+  {"id": "exporter", "lane": "语义",   "model": null, "role": "RDF/Turtle导出+rdflib回读+OWL一致性", "budget": "每心跳", "writes": "kg.ttl"}
+ ],
+ "emergence_protocol": "一切智能体产物(含推理机涌现)一律 raw-need-distill → R7蒸馏 → 代码判决 → 方可升格; 任何写入journal留链",
+ "cross_validation": "LLM提议 ↔ 代码判决 ↔ 拓扑审计 ↔ 符号引擎(sympy/z3) 四方交叉; 冲突由代码裁决"
+}

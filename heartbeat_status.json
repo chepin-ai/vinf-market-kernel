@@ -1,18 +1,18 @@
 {
- "ts": "2026-08-05 01:55:50",
+ "ts": "2026-08-05 02:08:48",
  "chain": {
   "ok": true,
-  "hops": 39,
-  "tail": "e412e7f2d5a7"
+  "hops": 40,
+  "tail": "c4df721fd53f"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
   "debts": 9,
-  "frontier": 67
+  "frontier": 79
  },
- "last_tick": "2026-08-05 01:55:49",
+ "last_tick": "2026-08-05 02:08:47",
  "finance": [
   "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
   "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",

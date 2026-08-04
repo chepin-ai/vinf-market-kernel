@@ -1,0 +1,55 @@
+{
+ "ts": "2026-08-05 02:08:47",
+ "results": [
+  {
+   "name": "chain",
+   "ok": true,
+   "note": "39跳 尾e412e7f2d5a7 "
+  },
+  {
+   "name": "journal_tail_fresh",
+   "ok": true,
+   "note": "39跳"
+  },
+  {
+   "name": "bundle_contract",
+   "ok": true,
+   "note": "缺无 chain=True"
+  },
+  {
+   "name": "ontology_parse",
+   "ok": true,
+   "note": "三元组360 parse=True"
+  },
+  {
+   "name": "reasoner",
+   "ok": true,
+   "note": "χ=25=β0-β1+β2 → β2=3(反解)"
+  },
+  {
+   "name": "finance_checks",
+   "ok": true,
+   "note": "F1:pass;F2:pass;F3:pass;F4:pass"
+  },
+  {
+   "name": "doctor",
+   "ok": true,
+   "note": "6/6健康 修复0"
+  },
+  {
+   "name": "command_registry",
+   "ok": true,
+   "note": "注册6个 未知命令拒绝rc=127"
+  },
+  {
+   "name": "engine_facade",
+   "ok": true,
+   "note": "v2.6.0 chain=ok"
+  },
+  {
+   "name": "data_freshness_cn",
+   "ok": true,
+   "note": "沪深300最新2026-08-04 (1d)"
+  }
+ ]
+}

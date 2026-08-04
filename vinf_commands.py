@@ -51,7 +51,7 @@ def cmd_ONTOLOGY(_):
     return dict(rc=max(a['rc'], b['rc']), out=a['out'] + ' | ' + b['out'])
 
 
-COMMANDS = {k[4:]: v for k, v in list(globals().items()) if k.startswith('cmd_')}
+COMMANDS = {k[4:].replace('_', '-'): v for k, v in list(globals().items()) if k.startswith('cmd_')}
 
 
 def execute(cmd, arg=None):

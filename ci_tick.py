@@ -73,6 +73,11 @@ def main():
         b = json.load(open('state_bundle.json'))
         b['ontology'] = dict(audit=oa, ttl_file='kg.ttl')
         b['reasoner'] = rr
+        for extra in ('doctor_report.json', 'selftest_report.json'):
+            if os.path.exists(extra):
+                b[extra.split('_')[0]] = json.load(open(extra))
+        if os.path.exists('agents_registry.json'):
+            b['agents_registry'] = json.load(open('agents_registry.json'))
         json.dump(b, open('state_bundle.json', 'w'), ensure_ascii=False, indent=1)
     except Exception:
         pass
