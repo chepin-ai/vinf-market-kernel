@@ -178,6 +178,8 @@ if __name__ == '__main__':
             vrp_ladder=_csv_rows('vrp_ladder.csv'),
             dalpha=_csv_rows('dalpha_trimmed.csv'),
             self_events=SELF_EVENTS,
+            strategies=json.load(open(os.path.join(WORK, 'strategies.json')))
+                     if os.path.exists(os.path.join(WORK, 'strategies.json')) else None,
         )
         json.dump(bundle, open(os.path.join(WORK, 'state_bundle.json'), 'w'), ensure_ascii=False)
         print(f"bundle: theorems={len(bundle['theorems'])} kg={len(kg['nodes'])}N/{len(kg['edges'])}E "
