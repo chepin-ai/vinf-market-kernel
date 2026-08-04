@@ -19,7 +19,7 @@ TRACKED = [
     'theory_db.sqlite', 'journal39.jsonl', 'pool.json',
     'vrp_ladder.csv', 'dalpha_ladder.csv', 'dalpha_trimmed.csv',
     'heartbeat_status.json', 'kg.json', 'STATUS.md', 'state_bundle.json', 'strategies.json',
-    'spx_fred.csv', 'vix_hist.csv', 'csi300.csv', 'shcomp.csv', 'tencent_hk.csv', 'market_pulse.json', 'vinf_market.py', 'ci_market.py', 'WATCHDOG.md', 'README.md',
+    'spx_fred.csv', 'vix_hist.csv', 'hsi.csv', 'us10y.csv', 'usdcny.csv', 'csi300.csv', 'shcomp.csv', 'tencent_hk.csv', 'market_pulse.json', 'vinf_market.py', 'ci_market.py', 'WATCHDOG.md', 'README.md',
     'ci_tick.py', 'ci_finance.py', 'ci_watchdog.py',
     'vinf_kg.py', 'vinf_sync.py',
     'engine.py', 'test_engine.py', 'selftest_report.json', 'agents_registry.json',

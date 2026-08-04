@@ -1,18 +1,18 @@
 {
- "ts": "2026-08-05 02:08:48",
+ "ts": "2026-08-05 02:52:45",
  "chain": {
   "ok": true,
-  "hops": 40,
-  "tail": "c4df721fd53f"
+  "hops": 42,
+  "tail": "341e4301baf6"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
   "debts": 9,
-  "frontier": 79
+  "frontier": 107
  },
- "last_tick": "2026-08-05 02:08:47",
+ "last_tick": "2026-08-05 02:50:19",
  "finance": [
   "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
   "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
@@ -34,8 +34,8 @@
   "SPY期权面(下载中):closed",
   "四年谱检验(已消解):closed",
   "逐庄面板(已消解):closed",
-  "SPX/VIX首源修复:open",
-  "HSI首源:open",
+  "SPX/VIX首源修复:closed",
+  "HSI首源:closed",
   "欧冠2026-27实时跟踪与前瞻:open"
  ]
 }

@@ -40,8 +40,21 @@ def cmd_DOCTOR(_):
 
 
 def cmd_BUNDLE(_):
-    """重建状态包"""
-    return _run('vinf_console.py', 'bundle')
+    """重建状态包 + 注入本体/推理机/医官/自测试/注册表(R56重构: 与ci_tick同一语义源)"""
+    r = _run('vinf_console.py', 'bundle')
+    try:
+        b = json.load(open('state_bundle.json'))
+        import vinf_ontology as vo
+        b['ontology'] = dict(audit=vo.OntologyExporter().validate(open('kg.ttl').read()), ttl_file='kg.ttl')
+        for extra in ('reasoner_report.json', 'doctor_report.json', 'selftest_report.json'):
+            if os.path.exists(extra):
+                b[extra.split('_')[0]] = json.load(open(extra))
+        if os.path.exists('agents_registry.json'):
+            b['agents_registry'] = json.load(open('agents_registry.json'))
+        json.dump(b, open('state_bundle.json', 'w'), ensure_ascii=False, indent=1)
+    except Exception as e:
+        return dict(rc=1, out=r['out'] + f' | 注入失败: {e}')
+    return r
 
 
 def cmd_ONTOLOGY(_):

@@ -94,8 +94,8 @@ vinf:debt_3 a vinf:DataDebt ; skos:prefLabel "电竞BO5(已消亡)"@zh ; vinf:ha
 vinf:debt_4 a vinf:DataDebt ; skos:prefLabel "SPY期权面(下载中)"@zh ; vinf:hasStatus "closed" ; vinf:statement "BL重构落成(38章): 359万行, VRP期限结构E5 + D_alpha阶梯" .
 vinf:debt_5 a vinf:DataDebt ; skos:prefLabel "四年谱检验(已消解)"@zh ; vinf:hasStatus "closed" ; vinf:statement "" .
 vinf:debt_6 a vinf:DataDebt ; skos:prefLabel "逐庄面板(已消解)"@zh ; vinf:hasStatus "closed" ; vinf:statement "" .
-vinf:debt_7 a vinf:DataDebt ; skos:prefLabel "SPX/VIX首源修复"@zh ; vinf:hasStatus "open" ; vinf:statement "Yahoo+FRED自07-17双阻断(沙箱与CI均不通); iFinD不覆盖美指/ETF; 已补Stooq第三源链待CI验证" .
-vinf:debt_8 a vinf:DataDebt ; skos:prefLabel "HSI首源"@zh ; vinf:hasStatus "open" ; vinf:statement "iFinD不覆盖HK指数; hsi.csv缺席; Stooq ^hsi已入链待CI验证" .
+vinf:debt_7 a vinf:DataDebt ; skos:prefLabel "SPX/VIX首源修复"@zh ; vinf:hasStatus "closed" ; vinf:statement "已修复: 第四源yahoo_finance插件(agent-gw)上线——SPX=7743.65/VIX=16.53(2026-08-04), stale=0d; 源链=yahoo直连→FRED→Stooq→yf插件→本地CSV; VINF_OFFLINE沙箱模式" .
+vinf:debt_8 a vinf:DataDebt ; skos:prefLabel "HSI首源"@zh ; vinf:hasStatus "closed" ; vinf:statement "已修复: hsi.csv建立并补2年历史(489行 2024-08-04→2026-08-02, 源=yahoo_finance插件); rv20=18.9% 分位48% 指标恢复" .
 vinf:debt_9 a vinf:DataDebt ; skos:prefLabel "欧冠2026-27实时跟踪与前瞻"@zh ; vinf:hasStatus "open" ; vinf:statement "2025-26已落幕; 联赛阶段9月开赛激活; 前瞻=Conj1 UCL域(已认证); 跟踪面板待建" .
 vinf:T1 vinf:dependsOn vinf:SORRY-T1 .
 vinf:T9 vinf:dependsOn vinf:T31 .

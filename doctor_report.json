@@ -1,10 +1,10 @@
 {
- "ts": "2026-08-05 01:55:01",
+ "ts": "2026-08-05 02:52:47",
  "checks": [
   {
    "name": "链完整性",
    "ok": true,
-   "note": "38跳 尾325f8a70929f"
+   "note": "42跳 尾341e4301baf6"
   },
   {
    "name": "金融状态新鲜度",
@@ -19,7 +19,7 @@
   {
    "name": "状态包新鲜度",
    "ok": true,
-   "note": "bundle 0.2h前"
+   "note": "bundle 0.0h前"
   },
   {
    "name": "本体回读",
@@ -33,8 +33,5 @@
   }
  ],
  "repairs": [],
- "open_issues": [
-  "标普500失联18d — 源链Yahoo/FRED/Stooq均不可达处, 台账债#7/#8跟踪",
-  "VIX失联18d — 源链Yahoo/FRED/Stooq均不可达处, 台账债#7/#8跟踪"
- ]
+ "open_issues": []
 }

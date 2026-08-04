@@ -3,7 +3,7 @@
 数据源链: Yahoo(query1/query2) → FRED(仅美股系列) → 本地CSV兜底(随Git追踪, 冷启动可用)。
 产物: market_pulse.json — 资产快照 + 跨市场信号 + 内核意见; 供 CI、Dashboard、策略引擎共用。
 """
-import os, json, time, urllib.request, io
+import os, json, time, urllib.request, io, subprocess
 import numpy as np
 import pandas as pd
 
@@ -72,23 +72,52 @@ def _local(path):
     return d.dropna()
 
 
+def _yfplugin(sym):
+    """第四源: yahoo_finance插件(agent-gw)。沙箱/手机直连被墙时的兜底;
+    CI无agent-gw时快速失败返回None。env VINF_YF_TOOL可覆盖脚本路径"""
+    tool = os.environ.get('VINF_YF_TOOL', '/app/.agents/plugins/yahoo_finance/scripts/yahoo_finance_tool.py')
+    if not os.path.exists(tool):
+        return None
+    try:
+        out = f'/tmp/yfplug_{sym.replace("^", "").replace("=", "_")}.csv'
+        r = subprocess.run(['python3', tool, 'call', '--api-name', 'get_historical_stock_prices',
+                            '--params-json', json.dumps({'ticker': sym, 'period': '1mo',
+                                                         'interval': '1d', 'file_path': out})],
+                           capture_output=True, text=True, timeout=120)
+        if not os.path.exists(out):
+            return None
+        d = pd.read_csv(out)
+        d = d.rename(columns={'Date': 'd', 'Close': 's'})[['d', 's']]
+        d['d'] = pd.to_datetime(d['d'], utc=True).dt.tz_localize(None).dt.normalize()
+        d['s'] = pd.to_numeric(d['s'], errors='coerce')
+        return d.dropna()
+    except Exception:
+        return None
+
+
+OFFLINE = os.environ.get('VINF_OFFLINE') == '1'  # 沙箱直连被墙: 跳过慢超时直连, 只用插件源+本地
+
+
 def load_asset(key):
-    """源链: 远端刷新(合并去重) → 本地兜底。返回(df, source, stale_days)"""
+    """源链: 远端刷新(合并去重) → 本地兜底。返回(df, source, stale_days)
+    链序: yahoo直连 → FRED → Stooq → yahoo_finance插件(agent-gw) → 本地CSV(永不伪造)"""
     a = ASSETS[key]
     base = _local(a['local'])
     fresh = None
-    if a['yahoo']:
+    if not OFFLINE and a['yahoo']:
         fresh = _yahoo(a['yahoo'])
-    if fresh is None and a['fred']:
+    if fresh is None and not OFFLINE and a['fred']:
         try:
             fresh = _fred(a['fred'])
         except Exception:
             fresh = None
-    if fresh is None and a.get('stooq'):
+    if fresh is None and not OFFLINE and a.get('stooq'):
         try:
             fresh = _stooq(a['stooq'])
         except Exception:
             fresh = None
+    if fresh is None and a['yahoo']:
+        fresh = _yfplugin(a['yahoo'])
     src = 'local'
     if fresh is not None and len(fresh):
         if base is None:

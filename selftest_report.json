@@ -1,15 +1,15 @@
 {
- "ts": "2026-08-05 02:08:47",
+ "ts": "2026-08-05 02:52:47",
  "results": [
   {
    "name": "chain",
    "ok": true,
-   "note": "39跳 尾e412e7f2d5a7 "
+   "note": "42跳 尾341e4301baf6 "
   },
   {
    "name": "journal_tail_fresh",
    "ok": true,
-   "note": "39跳"
+   "note": "42跳"
   },
   {
    "name": "bundle_contract",
@@ -50,6 +50,16 @@
    "name": "data_freshness_cn",
    "ok": true,
    "note": "沪深300最新2026-08-04 (1d)"
+  },
+  {
+   "name": "bundle_ontology",
+   "ok": true,
+   "note": "三元组360 parse=True"
+  },
+  {
+   "name": "data_freshness_us_hk",
+   "ok": true,
+   "note": "SPX/VIX/HSI均≤7d"
   }
  ]
 }

@@ -94,6 +94,28 @@ def t_data_freshness_cn():
     return age <= 7, f"沪深300最新{last.date()} ({age}d)"
 
 
+def t_bundle_ontology():
+    """回归(R56): 状态包必须含本体审计且parse_ok——曾因CI缺rdflib静默缺席"""
+    b = json.load(open('state_bundle.json'))
+    o = b.get('ontology', {}).get('audit', {})
+    return o.get('parse_ok') and o.get('triples', 0) > 100, f"三元组{o.get('triples')} parse={o.get('parse_ok')}"
+
+
+def t_data_freshness_us_hk():
+    """回归(R56): SPX/VIX/HSI失联18d/99d——yf插件第四源上线后不得回退"""
+    import pandas as pd
+    bad = []
+    for f, nm in [('spx_fred.csv', 'SPX'), ('vix_hist.csv', 'VIX'), ('hsi.csv', 'HSI')]:
+        if not os.path.exists(f):
+            bad.append(f'{nm}:缺席')
+            continue
+        last = pd.Timestamp(pd.read_csv(f).iloc[-1, 0])
+        age = (pd.Timestamp.now().normalize() - last).days
+        if age > 7:
+            bad.append(f'{nm}:{age}d')
+    return not bad, bad and ','.join(bad) or 'SPX/VIX/HSI均≤7d'
+
+
 def main():
     print('== v∞ 引擎自测试 ==')
     for name, fn in list(globals().items()):
