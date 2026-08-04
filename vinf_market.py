@@ -14,11 +14,11 @@ ASSETS = {
     'CN300':  dict(name='沪深300',   market='CN', local='csi300.csv',     yahoo='000300.SS', fred=None),
     'CNSH':   dict(name='上证综指',   market='CN', local='shcomp.csv',     yahoo='000001.SS', fred=None),
     'HK':     dict(name='腾讯(港股代理)', market='HK', local='tencent_hk.csv', yahoo='0700.HK', fred=None),
-    'HSI':    dict(name='恒生指数',   market='HK', local='hsi.csv',        yahoo='^HSI',     fred=None),
-    'SPX':    dict(name='标普500',   market='US', local='spx_fred.csv',   yahoo='^GSPC',    fred='SP500'),
-    'VIX':    dict(name='VIX',      market='US', local='vix_hist.csv',   yahoo='^VIX',     fred='VIXCLS'),
-    'US10Y':  dict(name='美债10Y',  market='US', local='us10y.csv',      yahoo='^TNX',     fred='DGS10'),
-    'CNY':    dict(name='美元/离岸人民币', market='FX', local='usdcny.csv',   yahoo='USDCNY=X', fred='DEXCHUS'),
+    'HSI':    dict(name='恒生指数',   market='HK', local='hsi.csv',        yahoo='^HSI',     fred=None, stooq='^hsi'),
+    'SPX':    dict(name='标普500',   market='US', local='spx_fred.csv',   yahoo='^GSPC',    fred='SP500', stooq='^spx'),
+    'VIX':    dict(name='VIX',      market='US', local='vix_hist.csv',   yahoo='^VIX',     fred='VIXCLS', stooq='^vix'),
+    'US10Y':  dict(name='美债10Y',  market='US', local='us10y.csv',      yahoo='^TNX',     fred='DGS10', stooq='10yusy'),
+    'CNY':    dict(name='美元/离岸人民币', market='FX', local='usdcny.csv',   yahoo='USDCNY=X', fred='DEXCHUS', stooq='usdcny'),
     'GOLD':   dict(name='黄金现货(沪)', market='CMD', local='gold.csv',    yahoo=None,      fred=None),
 }
 
@@ -41,6 +41,18 @@ def _fred(series):
     url = f'https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}'
     raw = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60).read().decode()
     d = pd.read_csv(io.StringIO(raw)); d.columns = ['d', 's']
+    d['d'] = pd.to_datetime(d['d']); d['s'] = pd.to_numeric(d['s'], errors='coerce')
+    return d.dropna()
+
+
+def _stooq(sym):
+    """Stooq日线CSV(无需key): Yahoo/FRED双阻断时的第三源"""
+    url = f'https://stooq.com/q/d/l/?s={sym}&i=d'
+    raw = urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30).read().decode()
+    if 'Date,' not in raw[:50]:
+        return None
+    d = pd.read_csv(io.StringIO(raw))
+    d = d.rename(columns={'Date': 'd', 'Close': 's'})[['d', 's']]
     d['d'] = pd.to_datetime(d['d']); d['s'] = pd.to_numeric(d['s'], errors='coerce')
     return d.dropna()
 
@@ -70,6 +82,11 @@ def load_asset(key):
     if fresh is None and a['fred']:
         try:
             fresh = _fred(a['fred'])
+        except Exception:
+            fresh = None
+    if fresh is None and a.get('stooq'):
+        try:
+            fresh = _stooq(a['stooq'])
         except Exception:
             fresh = None
     src = 'local'

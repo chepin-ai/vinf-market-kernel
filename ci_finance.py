@@ -37,9 +37,20 @@ def _yahoo(series):
     return _parse(pd.DataFrame({'d': pd.to_datetime(ts, unit='s').date, 'v': cl}))
 
 
+STOOQ = {'SP500': '^spx', 'VIXCLS': '^vix', 'DGS10': '10yusy', 'DEXCHUS': 'usdcny'}
+
+
+def _stooq(series):
+    raw = urllib.request.urlopen(urllib.request.Request(
+        f'https://stooq.com/q/d/l/?s={STOOQ[series]}&i=d', headers=UA), timeout=60).read().decode()
+    if 'Date,' not in raw[:50]:
+        raise RuntimeError('stooq challenge/empty')
+    return _parse(pd.read_csv(io.StringIO(raw)).rename(columns={'Date': 'd', 'Close': 'v'})[['d', 'v']])
+
+
 def fetch(series):
-    """多源容灾: FRED → Yahoo; 皆败则回退本地CSV(数据不更新但回测照跑)"""
-    for src in (_fred, _yahoo):
+    """多源容灾: FRED → Yahoo → Stooq; 皆败则回退本地CSV(数据不更新但回测照跑)"""
+    for src in (_fred, _yahoo, _stooq):
         for attempt in range(2):
             try:
                 return src(series)
