@@ -8,10 +8,12 @@ os.chdir(WORK)
 sys.path.insert(0, WORK)
 
 import vinf_market
+import vinf_paper
 
 
 def main():
-    p = vinf_market.build_pulse()
+    led, pact = vinf_paper.step()   # 虚拟盘先盯市/调仓
+    p = vinf_market.build_pulse()   # 态势感知(含轮动板)
     n_sig = len(p['signals'])
     crit = [s for s in p['signals'] if s['level'] == 'critical']
     lines = open('journal39.jsonl').read().strip().split('\n')
@@ -19,6 +21,7 @@ def main():
     brief = '; '.join(f"{k}={a.get('last', 0):.0f}({a.get('stale_days', '?')}d)"
                       for k, a in p['assets'].items() if a.get('last'))
     actions = [f"market-pulse: {brief}",
+               f"paper: NAV={led['nav']:.4f} 持仓={led['positions']} 动作={pact}",
                f"signals: {n_sig}条" + (f" 含critical: {crit[0]['text'][:60]}" if crit else ''),
                f"sources: {p['sources']}"]
     rec = dict(tick=int(time.time()), ts=time.strftime('%Y-%m-%d %H:%M:%S'), actions=actions, prev_hash=prev)

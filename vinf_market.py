@@ -18,6 +18,8 @@ ASSETS = {
     'SPX':    dict(name='标普500',   market='US', local='spx_fred.csv',   yahoo='^GSPC',    fred='SP500'),
     'VIX':    dict(name='VIX',      market='US', local='vix_hist.csv',   yahoo='^VIX',     fred='VIXCLS'),
     'US10Y':  dict(name='美债10Y',  market='US', local='us10y.csv',      yahoo='^TNX',     fred='DGS10'),
+    'CNY':    dict(name='美元/离岸人民币', market='FX', local='usdcny.csv',   yahoo='USDCNY=X', fred='DEXCHUS'),
+    'GOLD':   dict(name='黄金现货(沪)', market='CMD', local='gold.csv',    yahoo=None,      fred=None),
 }
 
 
@@ -163,8 +165,28 @@ def build_pulse():
         else:
             opinions[k] = f'中性区(分位{pct:.0f}%): 长端收割+票据组合体可运行, 仓位随分位递增递减'
 
+    # 宏观/地缘信号: 黄金动量 + 汇率 + 利率
+    g, cny, u10 = snap.get('GOLD', {}), snap.get('CNY', {}), snap.get('US10Y', {})
+    if g.get('mom60') is not None and g['mom60'] > 15:
+        add('GEO-GOLD', 'warning', f'黄金60日动量+{g["mom60"]:.1f}% — 地缘/避险叙事浓度高, 与CN波动率类外区共振')
+    if cny.get('mom20') is not None and abs(cny['mom20']) > 1.5:
+        add('FX-CNY', 'warning', f'USDCNY 20日{cny["mom20"]:+.2f}% — 汇率维度冲击传导中')
+    # 现货-ETF联动(跟踪缺口z分数)由rotation板承载
+
+    # 轮动/虚拟盘板块
+    rot = None
+    try:
+        import vinf_paper
+        px = pd.read_csv(os.path.join(WORK, 'sector_etf.csv'), parse_dates=['d'])
+        px = px.pivot_table(index='d', columns='name', values='s').sort_index().dropna()
+        cn300 = pd.read_csv(os.path.join(WORK, 'csi300.csv'), parse_dates=['d']).set_index('d')['s']
+        led = json.load(open(os.path.join(WORK, 'virtual_portfolio.json')))
+        rot = vinf_paper.board(led, px, cn300)
+    except Exception as e:
+        rot = dict(error=f'{type(e).__name__}: {e}')
+
     pulse = dict(updated=time.strftime('%Y-%m-%d %H:%M:%S'), assets=snap, signals=sigs,
-                 opinions=opinions, sources=srcs,
+                 opinions=opinions, sources=srcs, rotation=rot,
                  theorems=['T32', 'T33', 'T34', 'E5'])
     json.dump(pulse, open(os.path.join(WORK, 'market_pulse.json'), 'w'), ensure_ascii=False, indent=1)
     return pulse

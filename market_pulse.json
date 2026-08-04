@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-04 13:40:40",
+ "updated": "2026-08-04 22:47:25",
  "assets": {
   "CN300": {
    "last": 4543.1781,
@@ -72,9 +72,43 @@
    "stale_days": 18
   },
   "US10Y": {
+   "last": 4.75,
+   "date": "2026-07-31",
+   "chg1d": 1.4957264957265126,
+   "mom20": 5.790645879732725,
+   "mom60": 7.223476297968401,
+   "rv20": 13.297299408035318,
+   "rv_pct3y": 8.597883597883598,
    "name": "美债10Y",
    "market": "US",
-   "status": "absent"
+   "source": "local",
+   "stale_days": 4
+  },
+  "CNY": {
+   "last": 6.7509,
+   "date": "2026-07-31",
+   "chg1d": -0.06069578090304173,
+   "mom20": -0.5553427805438549,
+   "mom60": -1.1233815689261295,
+   "rv20": 1.6320752338960698,
+   "rv_pct3y": 25.66137566137566,
+   "name": "美元/离岸人民币",
+   "market": "FX",
+   "source": "local",
+   "stale_days": 4
+  },
+  "GOLD": {
+   "last": 884.22,
+   "date": "2026-08-04",
+   "chg1d": 0.13362928066680269,
+   "mom20": -2.033083306557948,
+   "mom60": -13.803591273322802,
+   "rv20": 12.477862370595133,
+   "rv_pct3y": 42.592592592592595,
+   "name": "黄金现货(沪)",
+   "market": "CMD",
+   "source": "local",
+   "stale_days": 0
   }
  },
  "signals": [
@@ -99,7 +133,88 @@
   "CNSH": "local",
   "HK": "local",
   "SPX": "local",
-  "VIX": "local"
+  "VIX": "local",
+  "US10Y": "local",
+  "CNY": "local",
+  "GOLD": "local"
+ },
+ "rotation": {
+  "date": "2026-08-04",
+  "rows": [
+   {
+    "asset": "银行",
+    "mom20": 6.9,
+    "mom63": 2.9,
+    "held": false
+   },
+   {
+    "asset": "半导体",
+    "mom20": -27.5,
+    "mom63": 1.3,
+    "held": false
+   },
+   {
+    "asset": "证券",
+    "mom20": -1.7,
+    "mom63": 0.9,
+    "held": false
+   },
+   {
+    "asset": "医疗",
+    "mom20": 9.2,
+    "mom63": -0.3,
+    "held": false
+   },
+   {
+    "asset": "红利",
+    "mom20": 6.3,
+    "mom63": -3.1,
+    "held": true
+   },
+   {
+    "asset": "沪深300ETF",
+    "mom20": -3.6,
+    "mom63": -4.8,
+    "held": false
+   },
+   {
+    "asset": "酒",
+    "mom20": 13.1,
+    "mom63": -7.5,
+    "held": false
+   },
+   {
+    "asset": "黄金现货",
+    "mom20": -2.0,
+    "mom63": -13.9,
+    "held": false
+   },
+   {
+    "asset": "有色",
+    "mom20": 0.3,
+    "mom63": -17.7,
+    "held": false
+   }
+  ],
+  "positions": [
+   "红利"
+  ],
+  "nav": 1.0,
+  "inception": "2026-08-04",
+  "n_trades": 1,
+  "bm_since_inception": 0.0,
+  "trades": [
+   {
+    "date": "2026-08-04",
+    "sell": [],
+    "buy": [
+     "红利"
+    ],
+    "why": "类外避险",
+    "rv_pct": 95.6,
+    "nav": 1.0
+   }
+  ]
  },
  "theorems": [
   "T32",
