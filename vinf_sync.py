@@ -56,6 +56,14 @@ def backup(msg='heartbeat tick'):
             shutil.copy2(src, os.path.join(REPO_DIR, f))
     _git('add', '-A')
     if not _git('status', '--porcelain'):
+<<<<<<< HEAD
+=======
+        # 自愈: 本地提交可能领先远端(上次推送中断), 仍需补推
+        ahead = _git('rev-list', '--count', 'origin/main..HEAD', check=False)
+        if ahead and ahead != '0':
+            _git('push', 'origin', 'HEAD:main')
+            return 'repushed ' + _git('rev-parse', '--short', 'HEAD')
+>>>>>>> c18e0c8 ([v∞] r45: T33 lottery-option duality (barbell = market winning ticket))
         return 'no-change'
     _git('commit', '-m', f'[v∞] {msg}')
     _git('push', 'origin', 'HEAD:main')
