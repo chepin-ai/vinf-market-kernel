@@ -1,0 +1,31 @@
+name: v∞-market-pulse
+on:
+  schedule:
+    - { cron: '50 8 * * 1-5' }    # 亚太收盘后
+    - { cron: '50 21 * * 1-5' }   # 美股收盘后
+  workflow_dispatch:
+permissions: { contents: write }
+concurrency: { group: vinf-market, cancel-in-progress: false }
+jobs:
+  pulse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -q numpy pandas
+      - run: python3 ci_market.py
+      - name: commit & push
+        run: |
+          git config user.email "vinf@kernel.dev"; git config user.name "v-infinity kernel"
+          git add -A
+          if git diff --cached --quiet; then echo "no-change"; exit 0; fi
+          git commit -m "[v∞] market pulse $(date -u +%F' '%H:%M)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            python3 ci_market.py
+            git add -A; git commit -m "[v∞] market pulse $(date -u +%F' '%H:%M) (re-run after race)" || true
+          done
+          git pull --rebase origin main && git push origin HEAD:main
