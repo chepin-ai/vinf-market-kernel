@@ -28,5 +28,14 @@
   "fitness": 0.3,
   "novelty": 0.748,
   "status": "raw-need-distill"
+ },
+ {
+  "id": "R004",
+  "text": "[reasoner:ALARM] 拓扑审计失败 χ=24 != β0-β1=21",
+  "parents": [],
+  "gen": 0,
+  "fitness": 0.0,
+  "novelty": 1.0,
+  "status": "raw-need-distill"
  }
 ]

@@ -1,18 +1,18 @@
 {
- "ts": "2026-08-05 00:07:09",
+ "ts": "2026-08-05 01:42:15",
  "chain": {
   "ok": true,
-  "hops": 36,
-  "tail": "b55dba55e7c4"
+  "hops": 38,
+  "tail": "325f8a70929f"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
-  "debts": 6,
+  "debts": 9,
   "frontier": 47
  },
- "last_tick": "2026-08-05 00:06:43",
+ "last_tick": "2026-08-05 01:42:02",
  "finance": [
   "[fin:F4] skip — sharpapi快照缺席(历史资产)",
   "[fin:F3] skip — 缺数据",
@@ -29,10 +29,13 @@
  ],
  "debts": [
   "2026决赛赔率行:closed",
-  "世界杯O/U赔率:open",
+  "世界杯O/U赔率:closed",
   "电竞BO5(已消亡):closed",
   "SPY期权面(下载中):closed",
   "四年谱检验(已消解):closed",
-  "逐庄面板(已消解):closed"
+  "逐庄面板(已消解):closed",
+  "SPX/VIX首源修复:open",
+  "HSI首源:open",
+  "欧冠2026-27实时跟踪与前瞻:open"
  ]
 }

@@ -1,0 +1,124 @@
+@prefix vinf: <http://vinf.ai/onto#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+vinf:Ontology a owl:Ontology ;
+  rdfs:label "v∞ 数学知识本体"@zh ;
+  rdfs:comment "自证伪理论机器的语义网表示: 命题(可证伪陈述)+证据(代码判决)+拓扑(细胞复形)"@zh ;
+  owl:versionInfo "1.0" .
+
+# ===== OWL 类层 =====
+vinf:Statement      a owl:Class ; rdfs:label "可判陈述" .
+vinf:Theorem        a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:Axiom          a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:Lemma          a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:Corollary      a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:Proposition    a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:ConditionalTheorem a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:EmpiricalLaw   a owl:Class ; rdfs:subClassOf vinf:Statement .
+vinf:Prediction     a owl:Class ; rdfs:subClassOf vinf:Statement ;
+  rdfs:comment "可证伪预测: 理论机器的排污口" .
+vinf:DataDebt       a owl:Class ; rdfs:label "数据债" .
+vinf:Proposal       a owl:Class ; rdfs:label "涌现提案" .
+vinf:Cell           a owl:Class ; rdfs:label "细胞" .
+vinf:CellComplex    a owl:Class ; rdfs:label "细胞复形" .
+vinf:Engine         a owl:Class ; rdfs:label "验证引擎" .
+
+# ===== 状态本体(互斥类, OWL disjointness 即可判定矛盾) =====
+vinf:Established    a owl:Class ; rdfs:subClassOf vinf:Status .
+vinf:Status         a owl:Class .
+vinf:Open           a owl:Class ; rdfs:subClassOf vinf:Status .
+vinf:Refuted        a owl:Class ; rdfs:subClassOf vinf:Status .
+vinf:Certified      a owl:Class ; rdfs:subClassOf vinf:Status .
+vinf:Established owl:disjointWith vinf:Refuted .
+vinf:Certified   owl:disjointWith vinf:Refuted .
+vinf:Open        owl:disjointWith vinf:Established, vinf:Certified, vinf:Refuted .
+
+# ===== 属性层 =====
+vinf:proves       a owl:ObjectProperty ; rdfs:domain vinf:Statement ; rdfs:range vinf:Statement ;
+  owl:transitiveProperty true ; rdfs:label "证明(传递)" .
+vinf:refutes      a owl:ObjectProperty ; rdfs:domain vinf:Statement ; rdfs:range vinf:Statement ;
+  rdfs:label "证伪" ; owl:disjointProperty vinf:proves .
+vinf:derives      a owl:ObjectProperty ; rdfs:label "派生" .
+vinf:evolves      a owl:ObjectProperty ; rdfs:label "演化" .
+vinf:dependsOn    a owl:ObjectProperty ; rdfs:label "依赖" ; owl:transitiveProperty true .
+vinf:verifiedBy   a owl:ObjectProperty ; rdfs:range vinf:Engine ; rdfs:label "判决引擎" .
+vinf:hasStatus    a owl:DatatypeProperty ; rdfs:label "状态" .
+vinf:statement    a owl:DatatypeProperty ; rdfs:label "命题文本" .
+vinf:emergedFrom  a owl:ObjectProperty ; rdfs:label "涌现自" .
+
+# ===== SKOS 概念体系(知识组织层) =====
+vinf:Scheme a skos:ConceptScheme ; rdfs:label "v∞ 知识体系" .
+vinf:Geometry   a skos:Concept ; skos:prefLabel "几何层"@zh ; skos:inScheme vinf:Scheme .
+vinf:Execution  a skos:Concept ; skos:prefLabel "执行层"@zh ; skos:inScheme vinf:Scheme .
+vinf:Finance    a skos:Concept ; skos:prefLabel "金融域"@zh ; skos:inScheme vinf:Scheme .
+vinf:Meta       a skos:Concept ; skos:prefLabel "元理论"@zh ; skos:inScheme vinf:Scheme .
+
+vinf:T2 a vinf:Theorem ; skos:prefLabel "T2 Bessel比分生成"@zh ; vinf:hasStatus "established" ; vinf:statement "Bessel比分生成" ; dct:created "2026" ; vinf:round 1 ; vinf:verifiedBy vinf:engine_code .
+vinf:T5 a vinf:Theorem ; skos:prefLabel "T5 顶点错价住kernel"@zh ; vinf:hasStatus "established" ; vinf:statement "顶点错价住kernel" ; dct:created "2026" ; vinf:round 2 ; vinf:verifiedBy vinf:engine_code .
+vinf:T6 a vinf:Theorem ; skos:prefLabel "T6 动力学杀不死零模"@zh ; vinf:hasStatus "established" ; vinf:statement "动力学杀不死零模" ; dct:created "2026" ; vinf:round 3 ; vinf:verifiedBy vinf:engine_code .
+vinf:T9 a vinf:Theorem ; skos:prefLabel "T9 边缘=区分器优势"@zh ; vinf:hasStatus "established" ; vinf:statement "边缘=区分器优势" ; dct:created "2026" ; vinf:round 4 ; vinf:verifiedBy vinf:engine_code .
+vinf:T13 a vinf:Theorem ; skos:prefLabel "T13 叙事税NT≥0全场域"@zh ; vinf:hasStatus "established" ; vinf:statement "叙事税NT≥0全场域" ; dct:created "2026" ; vinf:round 5 ; vinf:verifiedBy vinf:engine_code .
+vinf:T16 a vinf:Theorem ; skos:prefLabel "T16 收割窗口:NT>margin∧校准优势"@zh ; vinf:hasStatus "established" ; vinf:statement "收割窗口:NT>margin∧校准优势" ; dct:created "2026" ; vinf:round 6 ; vinf:verifiedBy vinf:engine_code .
+vinf:T17 a vinf:Theorem ; skos:prefLabel "T17 造雾定理"@zh ; vinf:hasStatus "established" ; vinf:statement "造雾定理" ; dct:created "2026" ; vinf:round 7 ; vinf:verifiedBy vinf:engine_code .
+vinf:T20 a vinf:Theorem ; skos:prefLabel "T20 容量定理Q*=(4/9)临界"@zh ; vinf:hasStatus "established" ; vinf:statement "容量定理Q*=(4/9)临界" ; dct:created "2026" ; vinf:round 8 ; vinf:verifiedBy vinf:engine_code .
+vinf:T23 a vinf:Theorem ; skos:prefLabel "T23 去量子化:市场=零温相"@zh ; vinf:hasStatus "established" ; vinf:statement "去量子化:市场=零温相" ; dct:created "2026" ; vinf:round 9 ; vinf:verifiedBy vinf:engine_code .
+vinf:T26 a vinf:Theorem ; skos:prefLabel "T26 max-mean聚合:q>p⟺R>Z_M"@zh ; vinf:hasStatus "established" ; vinf:statement "max-mean聚合:q>p⟺R>Z_M" ; dct:created "2026" ; vinf:round 10 ; vinf:verifiedBy vinf:engine_code .
+vinf:T27 a vinf:Theorem ; skos:prefLabel "T27 maxitive几何=Finsler"@zh ; vinf:hasStatus "established" ; vinf:statement "maxitive几何=Finsler" ; dct:created "2026" ; vinf:round 11 ; vinf:verifiedBy vinf:engine_code .
+vinf:T28 a vinf:ConditionalTheorem ; skos:prefLabel "T28 stakes形变=MDI对角倾斜"@zh ; vinf:hasStatus "established" ; vinf:statement "stakes形变=MDI对角倾斜" ; dct:created "2026" ; vinf:round 12 ; vinf:verifiedBy vinf:engine_code .
+vinf:C8 a vinf:Corollary ; skos:prefLabel "C8 时间晶体可见度∝1/κ"@zh ; vinf:hasStatus "established" ; vinf:statement "时间晶体可见度∝1/κ" ; dct:created "2026" ; vinf:round 14 ; vinf:verifiedBy vinf:engine_code .
+vinf:AX-MAX a vinf:Theorem ; skos:prefLabel "AX-MAX maxitive代数四公理：幂等max(x,x)=x、交换、结合、单调(x≤y⟹"@zh ; vinf:hasStatus "proved" ; vinf:statement "maxitive代数四公理：幂等max(x,x)=x、交换、结合、单调(x≤y⟹max(x,z)≤max(y,z))" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_z3 .
+vinf:GIBBS-2 a vinf:Theorem ; skos:prefLabel "GIBBS-2 Gibbs不等式(二点分布)：D(p||q)=p·ln(p/q)+(1−p)·l"@zh ; vinf:hasStatus "proved" ; vinf:statement "Gibbs不等式(二点分布)：D(p||q)=p·ln(p/q)+(1−p)·ln((1−p)/(1−q)) ≥ 0 (q=0.3固定)" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_sympy .
+vinf:T1 a vinf:Theorem ; skos:prefLabel "T1 加权平均≤上界"@zh ; vinf:hasStatus "established" ; vinf:statement "加权平均≤上界" ; dct:created "2026" ; vinf:round 0 ; vinf:verifiedBy vinf:engine_code .
+vinf:SORRY-T1 a vinf:Theorem ; skos:prefLabel "SORRY-T1 T1的SMT形式化: Σw_i x_i≤max(x)"@zh ; vinf:hasStatus "proved" ; vinf:statement "T1的SMT形式化: Σw_i x_i≤max(x)" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_z3 .
+vinf:T29 a vinf:ConditionalTheorem ; skos:prefLabel "T29 时间晶体=热带循环性(sup-卷积谱的周期点)"@zh ; vinf:hasStatus "axiom_candidate" ; vinf:statement "时间晶体=热带循环性(sup-卷积谱的周期点)" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_escalator .
+vinf:RENYI-MONO a vinf:Theorem ; skos:prefLabel "RENYI-MONO 同均值高斯Rényi散度D_α(q||p)关于α严格递增(可积域内)"@zh ; vinf:hasStatus "certified" ; vinf:statement "同均值高斯Rényi散度D_α(q||p)关于α严格递增(可积域内)" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_sympy-numeric .
+vinf:E5 a vinf:EmpiricalLaw ; skos:prefLabel "E5 叙事税沿期限强正相关(秩相关0.9),长端恒正,短端符号随RV制度翻转;非逐点严"@zh ; vinf:hasStatus "established" ; vinf:statement "叙事税沿期限强正相关(秩相关0.9),长端恒正,短端符号随RV制度翻转;非逐点严格单调" ; dct:created "2026" ; vinf:round 39 ; vinf:verifiedBy vinf:engine_test_forge .
+vinf:T31 a vinf:Proposition ; skos:prefLabel "T31 自然即ZKP证明系统: 自然=零知识Prover(只泄露现象不泄露机制), 实验"@zh ; vinf:hasStatus "open" ; vinf:statement "自然即ZKP证明系统: 自然=零知识Prover(只泄露现象不泄露机制), 实验=Verifier交互挑战, 物理理论=简洁论证(SNARK: 简洁=奥卡姆, soundness=可证伪性, 可提取性=机制反演), 数学物理前沿突破=对该系统的extractor攻击" ; dct:created "2026" ; vinf:round 41 ; vinf:verifiedBy vinf:engine_panel-pending .
+vinf:T32 a vinf:Theorem ; skos:prefLabel "T32 彩票假说-形变收缩对应(T32, Frankle&Carbin ICLR2019"@zh ; vinf:hasStatus "certified" ; vinf:statement "彩票假说-形变收缩对应(T32, Frankle&Carbin ICLR2019): 过参数化网络f_θ的计算细胞复形K(θ)中, 中奖票据m⊙θ₀是子复形L⊂K, 受限训练在函数空间给出形变收缩: 存在同伦H:[0,1]→C(X,Y), H(0)=f_{θ_T}, H(1)=f_{m⊙θ₀,T}, 精度间隙<ε。迭代幅度剪枝=离散Morse消去(按幅度滤子的自由面对消去), 回卷θ₀=保持同一盆地/同伦类的基点条件, 随机重初始化=改变基点破坏收缩; 极限剪枝切断本质环(β₁塌陷)时票据失效。实验证: 4482参数MLP, IMP存活率100%→41%, 回卷票据acc 0.908→0.892, 随机重init 0.913→0.878, 同存活率下回卷恒优于重init(差距随稀疏度增至1.5pt), 函数对数偏差0→0.41。内核映射: 票据=保持函数同伦型的极小子复形 ⇔ 知识细胞复形的β₁冗余环=鲁棒性储备, sorry消解=在不改变同伦型下对消去冗余证明。" ; dct:created "2026" ; vinf:round 44 ; vinf:verifiedBy vinf:engine_numeric-certificate-numpy-IM .
+vinf:T34 a vinf:Theorem ; skos:prefLabel "T34 彩票-期权对偶的跨市场普适性(T34, T33的A股复现): 在沪深300十年数"@zh ; vinf:hasStatus "certified" ; vinf:statement "彩票-期权对偶的跨市场普适性(T34, T33的A股复现): 在沪深300十年数据(2016-08~2026-08, 121月, iFinD)上以代理隐含波动率(20日RV×1.15)重跑T33三判决: 卖翼(剪枝)累计-7.7σ/回撤10.5σ/最差月-3.51σ——类外崩溃复现; 买翼·基点入场(低波三分位=回卷θ₀)累计+11.3σ/回撤仅0.6σ/最好月+3.51σ; 随机入场(重init)-1.7σ/回撤3.8σ。P1(收缩类内有效类外失效)与P2(基点条件)在A股全部复现且强度超美股——票据-收缩对偶不是美股期权微观结构的偶然, 而是跨市场不变量。边界声明: 代理隐含非真实期权IV, 未计交易成本; 港股腿待Yahoo在CI打通后补证(当前信号级)。" ; dct:created "2026" ; vinf:round 48 ; vinf:verifiedBy vinf:engine_numeric-certificate-ifind-CS .
+vinf:T33 a vinf:Theorem ; skos:prefLabel "T33 彩票-期权对偶(T33, T32×E5/F3碰撞): 在sup主导/maxiti"@zh ; vinf:hasStatus "certified" ; vinf:statement "彩票-期权对偶(T33, T32×E5/F3碰撞): 在sup主导/maxitive定价下(D_α阶梯, D∞/D1中位7.3), 期权市场是对支付复形的反向IMP: 权利金不按概率质量而按胞在形变收缩下的本质性分配——尾部胞(本质环)获约7倍期望公允价。组合学对应: 卖翼组合=被剪枝网络(消去全部尾部胞), 杠铃=中奖票据(剪中间胞, 保安全基点+尾部环)。实证(2016-2026 SPX/VIX真实数据, 首破准则兑付): P1剪枝组合(卖0.5σ翼,公允权利金0.40σ)类内稳赚(最好月+0.65σ)类外单月-3.53σ(2020-03)、十年最大回撤8.2σ、累计-2.8σ; P2票据组合(买翼)基点入场(滚动3年最低VIX三分位=回卷θ₀)累计+1.4σ/回撤1.1σ, 随机入场(重init)+0.8σ/回撤2.4σ; P3卖方损益不对称0.65/3.53=5.4倍同构于D∞/D1=7.3。涌现: 塔勒布杠铃策略=市场的中奖票据。" ; dct:created "2026" ; vinf:round 45 ; vinf:verifiedBy vinf:engine_numeric-certificate-pandas-S .
+vinf:pred_Pred1 a vinf:Prediction ; skos:prefLabel "Pred1 2030世界杯决赛平局率≥40%"@zh ; vinf:hasStatus "open" ; vinf:statement "2030世界杯决赛平局率≥40%" .
+vinf:pred_Pred2 a vinf:Prediction ; skos:prefLabel "Pred2 PEAD随HFT渗透衰减"@zh ; vinf:hasStatus "open" ; vinf:statement "PEAD随HFT渗透衰减" .
+vinf:pred_Pred3 a vinf:Prediction ; skos:prefLabel "Pred3 跨场价差=规范曲率"@zh ; vinf:hasStatus "open" ; vinf:statement "跨场价差=规范曲率" .
+vinf:pred_Pred5 a vinf:Prediction ; skos:prefLabel "Pred5 欧冠决赛平局低估"@zh ; vinf:hasStatus "refuted" ; vinf:statement "欧冠决赛平局低估" .
+vinf:pred_Pred7 a vinf:Prediction ; skos:prefLabel "Pred7 R32结构盲点衰减"@zh ; vinf:hasStatus "open" ; vinf:statement "R32结构盲点衰减" .
+vinf:pred_Pred8 a vinf:Prediction ; skos:prefLabel "Pred8 套利窗口<10s@2028"@zh ; vinf:hasStatus "open" ; vinf:statement "套利窗口<10s@2028" .
+vinf:debt_1 a vinf:DataDebt ; skos:prefLabel "2026决赛赔率行"@zh ; vinf:hasStatus "closed" ; vinf:statement "手机端心跳消解: 决赛西班牙加时1-0阿根廷(费兰·托雷斯106分钟); 收盘三向+265/+210/+125, O/U 2 (-138/+114), 水位4.1%/4.7%合理, 90分钟0-0结算一致性通过; 无写权限经人并轨" .
+vinf:debt_2 a vinf:DataDebt ; skos:prefLabel "世界杯O/U赔率"@zh ; vinf:hasStatus "closed" ; vinf:statement "对象消亡: 决赛已赛(西班牙加时1-0), O/U 2收盘-138/+114已入账于债1注记; 赛后赔率停更, 归档非损坏" .
+vinf:debt_3 a vinf:DataDebt ; skos:prefLabel "电竞BO5(已消亡)"@zh ; vinf:hasStatus "closed" ; vinf:statement "BO3决赛替代, HLTV 7033场" .
+vinf:debt_4 a vinf:DataDebt ; skos:prefLabel "SPY期权面(下载中)"@zh ; vinf:hasStatus "closed" ; vinf:statement "BL重构落成(38章): 359万行, VRP期限结构E5 + D_alpha阶梯" .
+vinf:debt_5 a vinf:DataDebt ; skos:prefLabel "四年谱检验(已消解)"@zh ; vinf:hasStatus "closed" ; vinf:statement "" .
+vinf:debt_6 a vinf:DataDebt ; skos:prefLabel "逐庄面板(已消解)"@zh ; vinf:hasStatus "closed" ; vinf:statement "" .
+vinf:debt_7 a vinf:DataDebt ; skos:prefLabel "SPX/VIX首源修复"@zh ; vinf:hasStatus "open" ; vinf:statement "Yahoo+FRED自07-17双阻断(沙箱与CI均不通); iFinD不覆盖美指/ETF; 已补Stooq第三源链待CI验证" .
+vinf:debt_8 a vinf:DataDebt ; skos:prefLabel "HSI首源"@zh ; vinf:hasStatus "open" ; vinf:statement "iFinD不覆盖HK指数; hsi.csv缺席; Stooq ^hsi已入链待CI验证" .
+vinf:debt_9 a vinf:DataDebt ; skos:prefLabel "欧冠2026-27实时跟踪与前瞻"@zh ; vinf:hasStatus "open" ; vinf:statement "2025-26已落幕; 联赛阶段9月开赛激活; 前瞻=Conj1 UCL域(已认证); 跟踪面板待建" .
+vinf:T1 vinf:dependsOn vinf:SORRY-T1 .
+vinf:T9 vinf:dependsOn vinf:T31 .
+vinf:T9-KG-cell-complex vinf:dependsOn vinf:T32 .
+vinf:T33-T32 vinf:dependsOn vinf:T34 .
+vinf:T32-E5-F3 vinf:dependsOn vinf:T33 .
+vinf:E4 vinf:derives vinf:closure-15 .
+vinf:E5 vinf:derives vinf:closure-15 .
+vinf:T13 vinf:derives vinf:closure-16 .
+vinf:E5 vinf:derives vinf:closure-16 .
+vinf:T26 vinf:derives vinf:closure-17 .
+vinf:E4 vinf:derives vinf:closure-17 .
+vinf:T31 vinf:derives vinf:closure-26 .
+vinf:T9 vinf:derives vinf:closure-26 .
+vinf:P001 vinf:evolves vinf:P003 .
+vinf:P002 vinf:evolves vinf:P003 .
+vinf:engine_code a vinf:Engine ; skos:prefLabel "code" ; vinf:hasStatus "code" .
+vinf:engine_z3 a vinf:Engine ; skos:prefLabel "z3" ; vinf:hasStatus "code" .
+vinf:engine_sympy a vinf:Engine ; skos:prefLabel "sympy" ; vinf:hasStatus "code" .
+vinf:engine_escalator a vinf:Engine ; skos:prefLabel "escalator" ; vinf:hasStatus "mixed" .
+vinf:engine_sympy-numeric a vinf:Engine ; skos:prefLabel "sympy+numeric" ; vinf:hasStatus "mixed" .
+vinf:engine_test_forge a vinf:Engine ; skos:prefLabel "test_forge" ; vinf:hasStatus "mixed" .
+vinf:engine_panel-pending a vinf:Engine ; skos:prefLabel "panel-pending" ; vinf:hasStatus "mixed" .
+vinf:engine_numeric-certificate-numpy-IM a vinf:Engine ; skos:prefLabel "numeric-certificate(numpy-IMP)+proof-sketch(Morse收缩)" ; vinf:hasStatus "mixed" .
+vinf:engine_numeric-certificate-ifind-CS a vinf:Engine ; skos:prefLabel "numeric-certificate(ifind-CSI300-10y)+replication" ; vinf:hasStatus "mixed" .
+vinf:engine_numeric-certificate-pandas-S a vinf:Engine ; skos:prefLabel "numeric-certificate(pandas-SPX-VIX)+duality-sketch" ; vinf:hasStatus "mixed" .

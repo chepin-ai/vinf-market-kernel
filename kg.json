@@ -154,6 +154,11 @@
    "id": "P003",
    "type": "proposal",
    "status": "raw-need-distill"
+  },
+  {
+   "id": "R004",
+   "type": "proposal",
+   "status": "raw-need-distill"
   }
  ],
  "edges": [
@@ -233,5 +238,5 @@
    "rel": "evolves"
   }
  ],
- "built": "2026-08-04 14:39:25"
+ "built": "2026-08-05 01:42:15"
 }

@@ -35,17 +35,38 @@ def main():
     for r in fin:
         print(f"  [{r['fid']}] {r['verdict']} — {r.get('detail','')}")
 
+    # 2.5 本体导出 + 推理机(自推演/自验证/自涌现, 第53章)
+    try:
+        import vinf_ontology as vo
+        import vinf_reasoner as vr
+        _, oa = vo.OntologyExporter().run()
+        _, n_em = vr.Reasoner().run()
+        rr = json.load(open('reasoner_report.json'))
+        acts.append(f"ontology: triples={oa['triples']} parse={'OK' if oa['parse_ok'] else 'FAIL'}"
+                    f" contradictions={len(oa['contradictions'])}")
+        acts.append(f"reasoner: deduce={len(rr['deductions'])} alarm={len(rr['contradictions'])}"
+                    f" emergent={n_em} topo={'OK' if rr['topology'].get('ok') else 'FAIL'}")
+    except Exception as e:
+        acts.append(f"ontology/reasoner: ERROR {type(e).__name__}: {str(e)[:60]}")
+
     # 3 状态与bundle
     st = vc.status(write=True)
     acts.append(f"status: chain=ok tail={st['chain'].get('tail')}")
-    k.journal(acts[1:])          # 第二跳: 金融+状态(首跳closure)
+    k.journal(acts[1:])          # 第二跳: 金融+本体+状态(首跳closure)
     print(f"journal: {v['hops']+2} hops")
 
-    # 4 重建状态包(Dashboard契约)
+    # 4 重建状态包(Dashboard契约) + 本体摘要注入
     import subprocess
     r = subprocess.run([sys.executable, 'vinf_console.py', 'bundle'],
                        capture_output=True, text=True, cwd=WORK)
     print(r.stdout.strip() or r.stderr[:200])
+    try:
+        b = json.load(open('state_bundle.json'))
+        b['ontology'] = dict(audit=oa, ttl_file='kg.ttl')
+        b['reasoner'] = rr
+        json.dump(b, open('state_bundle.json', 'w'), ensure_ascii=False, indent=1)
+    except Exception:
+        pass
     print('CI_TICK_OK')
 
 

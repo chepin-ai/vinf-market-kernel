@@ -12,6 +12,7 @@ WORK = '/mnt/agents/work/worldcup2026'
 # 纳入版本管理的状态文件（密钥与大数据永不出境）
 TRACKED = [
     'vinf_agents.py', 'vinf_provers.py', 'vinf_resolver.py', 'vinf_os.py',
+    'vinf_ontology.py', 'vinf_reasoner.py', 'kg.ttl', 'reasoner_report.json',
     'vinf_finance.py', 'vinf_console.py', 'vinf_policy.json', 'v39_demo.py',
     'vinf_maxitive.py', 'vinf_data.py', 'vinf_engine.py', 'backtest_real_2014_2026.py',
     'bl_reconstruction.py', 'MarketKernel.lean',

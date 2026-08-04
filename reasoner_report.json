@@ -1,0 +1,20 @@
+{
+ "ts": "2026-08-05 01:39:30",
+ "deductions": [],
+ "topology": {
+  "ok": true,
+  "V": 31,
+  "E": 10,
+  "F": 3,
+  "chi": 24,
+  "betti": [
+   22,
+   1
+  ],
+  "betti2_implied": 3,
+  "note": "χ=24=β0-β1+β2 → β2=3(反解)"
+ },
+ "sympy_xval": [],
+ "contradictions": [],
+ "emergent": []
+}
