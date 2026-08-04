@@ -1,18 +1,18 @@
 {
- "ts": "2026-08-04 14:39:25",
+ "ts": "2026-08-05 00:07:09",
  "chain": {
   "ok": true,
-  "hops": 31,
-  "tail": "66747a4a6420"
+  "hops": 36,
+  "tail": "b55dba55e7c4"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
   "debts": 6,
-  "frontier": 51
+  "frontier": 47
  },
- "last_tick": "2026-08-04 14:39:25",
+ "last_tick": "2026-08-05 00:06:43",
  "finance": [
   "[fin:F4] skip — sharpapi快照缺席(历史资产)",
   "[fin:F3] skip — 缺数据",

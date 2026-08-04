@@ -83,11 +83,39 @@ def board(led, px, cn):
                              held=c in led['positions']))
     rows.sort(key=lambda r: -(r['mom63'] if r['mom63'] == r['mom63'] else -999))
     bm = px['沪深300ETF'] / px['沪深300ETF'].iloc[0]
-    return dict(date=str(d.date()), rows=rows, positions=led['positions'], nav=led['nav'],
-                inception=led['inception'], n_trades=len(led['trades']),
-                bm_since_inception=round(float(bm.iloc[-1] / bm.loc[pd.Timestamp(led['inception'])] - 1) * 100, 2)
-                if pd.Timestamp(led['inception']) in bm.index else None,
-                trades=led['trades'][-8:][::-1])
+    out = dict(date=str(d.date()), rows=rows, positions=led['positions'], nav=led['nav'],
+               inception=led['inception'], n_trades=len(led['trades']),
+               bm_since_inception=round(float(bm.iloc[-1] / bm.loc[pd.Timestamp(led['inception'])] - 1) * 100, 2)
+               if pd.Timestamp(led['inception']) in bm.index else None,
+               trades=led['trades'][::-1],
+               nav_history=led.get('nav_history', []))
+    # 回测全史(前瞻判决器的参照系): 轮动NAV vs 沪深300ETF, 降采样至~120点
+    try:
+        bt = pd.read_csv(os.path.join(os.path.dirname(__file__), 'rotation_nav.csv'),
+                         index_col=0, parse_dates=True)['nav']
+        step_n = max(1, len(bt) // 120)
+        bt_d = bt.iloc[::step_n]
+        bm3 = px['沪深300ETF'].reindex(bt.index).ffill()
+        bm3 = (bm3 / bm3.iloc[0]).iloc[::step_n]
+        out['backtest'] = [dict(date=str(i.date()), nav=round(float(v), 3),
+                                bm=round(float(bm3.loc[i]), 3)) for i, v in bt_d.items()]
+    except Exception:
+        out['backtest'] = []
+    # 当前态势判定: 用代码把"为什么持有这些仓位"讲清楚
+    try:
+        rv = cn.pct_change().rolling(20).std() * np.sqrt(252) * 100
+        hist = rv.iloc[-756:] if len(rv) > 756 else rv
+        pct = float((hist <= rv.iloc[-1]).mean() * 100)
+        if pct >= 90:
+            stance = f'类外区(波动分位{pct:.0f}%≥90%): T33/T34判决——卖方剪枝禁用, 轮动自动切红利避险; 当前持仓即判决的执行'
+        elif pct <= 33:
+            stance = f'票据窗口(波动分位{pct:.0f}%≤33%): 低波基点附近, 允许动量持仓, 关注TICKET-ENTRY'
+        else:
+            stance = f'常态区(波动分位{pct:.0f}%): 按63日动量前2等权持仓, 月度调仓'
+        out['stance'] = dict(rv_pct=round(pct, 1), text=stance)
+    except Exception:
+        pass
+    return out
 
 
 if __name__ == '__main__':

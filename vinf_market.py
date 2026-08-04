@@ -185,8 +185,33 @@ def build_pulse():
     except Exception as e:
         rot = dict(error=f'{type(e).__name__}: {e}')
 
+    # 引擎协作状态: 谁何时最后写了什么, 供Dashboard健康面板判决
+    engines = {}
+    try:
+        hb = json.load(open(os.path.join(WORK, 'heartbeat_status.json')))
+        engines['heartbeat'] = dict(expect='每6h', last=hb.get('last_tick'),
+                                    chain_hops=hb.get('chain', {}).get('hops'),
+                                    note='Actions心跳/手机验证者共用协议')
+    except Exception:
+        pass
+    try:
+        wd = open(os.path.join(WORK, 'WATCHDOG.md')).read()
+        engines['watchdog'] = dict(expect='每周日', last=wd.strip().splitlines()[0][:60] if wd.strip() else None,
+                                   note='独立监督: 断链/失联即红旗')
+    except Exception:
+        pass
+    try:
+        st = json.load(open(os.path.join(WORK, 'strategies.json')))
+        engines['finance_daily'] = dict(expect='每日', last=st.get('meta', {}).get('updated'),
+                                        note='T33/T34回测重算+策略指标')
+    except Exception:
+        pass
+    engines['market_pulse'] = dict(expect='交易日2次', last=time.strftime('%Y-%m-%d %H:%M:%S'),
+                                   note='本脉搏+虚拟盘记账')
+    engines['phone_verifier'] = dict(expect='每3天09:00', last=None, note='只读验链, 禁止写入')
+
     pulse = dict(updated=time.strftime('%Y-%m-%d %H:%M:%S'), assets=snap, signals=sigs,
-                 opinions=opinions, sources=srcs, rotation=rot,
+                 opinions=opinions, sources=srcs, rotation=rot, engines=engines,
                  theorems=['T32', 'T33', 'T34', 'E5'])
     json.dump(pulse, open(os.path.join(WORK, 'market_pulse.json'), 'w'), ensure_ascii=False, indent=1)
     return pulse
