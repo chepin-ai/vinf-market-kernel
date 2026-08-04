@@ -1,18 +1,18 @@
 {
- "ts": "2026-08-04 19:56:12",
+ "ts": "2026-08-04 20:29:17",
  "chain": {
   "ok": true,
-  "hops": 45,
-  "tail": "cabfd52d367c"
+  "hops": 47,
+  "tail": "84f083667c95"
  },
  "db": {
   "theorems": 24,
   "predictions": 6,
   "assets": 0,
   "debts": 9,
-  "frontier": 123
+  "frontier": 139
  },
- "last_tick": "2026-08-04 19:56:11",
+ "last_tick": "2026-08-04 20:29:17",
  "finance": [
   "[fin:F1] skip — vrp_ladder.csv缺席",
   "[fin:F2] skip — 缺数据",

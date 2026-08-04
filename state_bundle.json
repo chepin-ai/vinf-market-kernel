@@ -1,19 +1,19 @@
 {
  "status": {
-  "ts": "2026-08-04 19:56:12",
+  "ts": "2026-08-04 20:29:17",
   "chain": {
    "ok": true,
-   "hops": 45,
-   "tail": "cabfd52d367c"
+   "hops": 47,
+   "tail": "84f083667c95"
   },
   "db": {
    "theorems": 24,
    "predictions": 6,
    "assets": 0,
    "debts": 9,
-   "frontier": 123
+   "frontier": 139
   },
-  "last_tick": "2026-08-04 19:56:11",
+  "last_tick": "2026-08-04 20:29:17",
   "finance": [
    "[fin:F1] skip — vrp_ladder.csv缺席",
    "[fin:F2] skip — 缺数据",
@@ -280,7 +280,7 @@
     "rel": "evolves"
    }
   ],
-  "built": "2026-08-04 19:56:12"
+  "built": "2026-08-04 20:29:17"
  },
  "cell_complex": {
   "V": 32,
@@ -530,6 +530,102 @@
  ],
  "frontier": [
   {
+   "id": 161,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 160,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 159,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 158,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 157,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 156,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 155,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 154,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 153,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 152,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 151,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 150,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 149,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 148,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 147,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 146,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
    "id": 145,
    "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
    "source": "finance_engine",
@@ -669,102 +765,6 @@
   },
   {
    "id": 122,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 121,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 120,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 119,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 118,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 117,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 116,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 115,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 114,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 113,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 112,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 111,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 110,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 109,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 108,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 107,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 106,
    "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
    "source": "finance_engine",
    "round": 40
@@ -1383,6 +1383,31 @@
    ],
    "prev_hash": "665f2e946ee9ac2acacf54e953c49a4e614d7eb57c04b10f191e46c0ec36cec4",
    "hash": "cabfd52d367ca5bd2ebe4ee69c922afebed624d546eccd47b778049634618adb"
+  },
+  {
+   "tick": 1785875356,
+   "ts": "2026-08-04 20:29:16",
+   "actions": [
+    "sync: db={'theorems': 24, 'predictions': 6, 'assets': 0, 'debts': 9, 'frontier': 127}",
+    "closure: 0"
+   ],
+   "prev_hash": "cabfd52d367ca5bd2ebe4ee69c922afebed624d546eccd47b778049634618adb",
+   "hash": "4737750d2008323dfad3d4ba0e82451756b05da7b6fb2a6a2d682a81b80e2b7c"
+  },
+  {
+   "tick": 1785875357,
+   "ts": "2026-08-04 20:29:17",
+   "actions": [
+    "closure: 0",
+    "journal: 4737750d2008",
+    "finance: [('F1', 'skip'), ('F2', 'skip'), ('F3', 'skip'), ('F4', 'archived')]",
+    "ontology: triples=360 parse=OK contradictions=0",
+    "reasoner: deduce=0 alarm=0 emergent=0 topo=OK",
+    "doctor: 5/6健康 修复1 遗留0",
+    "status: chain=ok tail=4737750d2008"
+   ],
+   "prev_hash": "4737750d2008323dfad3d4ba0e82451756b05da7b6fb2a6a2d682a81b80e2b7c",
+   "hash": "84f083667c958347465b62a6db5e5378872af7fda89d1d48c7852b6d4adab3ae"
   }
  ],
  "policy": {
@@ -2891,7 +2916,7 @@
   "ttl_file": "kg.ttl"
  },
  "reasoner": {
-  "ts": "2026-08-04 19:56:11",
+  "ts": "2026-08-04 20:29:16",
   "deductions": [],
   "topology": {
    "ok": true,
@@ -2911,17 +2936,17 @@
   "emergent": []
  },
  "doctor": {
-  "ts": "2026-08-04 19:56:11",
+  "ts": "2026-08-04 20:29:16",
   "checks": [
    {
     "name": "链完整性",
     "ok": true,
-    "note": "44跳 尾665f2e946ee9"
+    "note": "46跳 尾4737750d2008"
    },
    {
     "name": "金融状态新鲜度",
-    "ok": true,
-    "note": "status与文件一致"
+    "ok": false,
+    "note": "F1误报skip(文件已在, status滞后)"
    },
    {
     "name": "CN系时效",
@@ -2944,7 +2969,13 @@
     "note": "推演 0 · 矛盾 0 · sympy复核 0 · 涌现注入 0"
    }
   ],
-  "repairs": [],
+  "repairs": [
+   {
+    "name": "金融状态新鲜度",
+    "rc": 0,
+    "out": "T1:proved\",\n  \"T29:axiom_candidate\",\n  \"RENYI-MONO:certified\",\n  \"T31:open\"\n ],\n \"debts\": [\n  \"2026决赛赔率行:closed\",\n  \"世界杯O/U赔率:closed\",\n  \"电竞BO5(已消亡):closed\",\n  \"SPY期权面(下载中):closed\",\n  \"四年谱检验(已消解):closed\",\n  \"逐庄面板(已消解):closed\",\n  \"SPX/VIX首源修复:closed\",\n  \"HSI首源:closed\",\n  \"欧冠2026-27实时跟踪与前瞻:open\"\n ]\n}\n"
+   }
+  ],
   "open_issues": []
  },
  "selftest": {

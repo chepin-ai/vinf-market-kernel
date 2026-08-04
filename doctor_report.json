@@ -1,15 +1,15 @@
 {
- "ts": "2026-08-04 19:56:11",
+ "ts": "2026-08-04 20:29:16",
  "checks": [
   {
    "name": "链完整性",
    "ok": true,
-   "note": "44跳 尾665f2e946ee9"
+   "note": "46跳 尾4737750d2008"
   },
   {
    "name": "金融状态新鲜度",
-   "ok": true,
-   "note": "status与文件一致"
+   "ok": false,
+   "note": "F1误报skip(文件已在, status滞后)"
   },
   {
    "name": "CN系时效",
@@ -32,6 +32,12 @@
    "note": "推演 0 · 矛盾 0 · sympy复核 0 · 涌现注入 0"
   }
  ],
- "repairs": [],
+ "repairs": [
+  {
+   "name": "金融状态新鲜度",
+   "rc": 0,
+   "out": "T1:proved\",\n  \"T29:axiom_candidate\",\n  \"RENYI-MONO:certified\",\n  \"T31:open\"\n ],\n \"debts\": [\n  \"2026决赛赔率行:closed\",\n  \"世界杯O/U赔率:closed\",\n  \"电竞BO5(已消亡):closed\",\n  \"SPY期权面(下载中):closed\",\n  \"四年谱检验(已消解):closed\",\n  \"逐庄面板(已消解):closed\",\n  \"SPX/VIX首源修复:closed\",\n  \"HSI首源:closed\",\n  \"欧冠2026-27实时跟踪与前瞻:open\"\n ]\n}\n"
+  }
+ ],
  "open_issues": []
 }
