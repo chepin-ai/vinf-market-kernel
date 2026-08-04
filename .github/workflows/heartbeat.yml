@@ -1,30 +1,34 @@
-name: v∞ Heartbeat
-
+name: v∞-heartbeat
 on:
-  schedule:
-    - cron: '0 */6 * * *'  # 每6小时
+  schedule: [{ cron: '17 */6 * * *' }]
   workflow_dispatch:
-
+permissions: { contents: write }
+concurrency: { group: vinf-heartbeat, cancel-in-progress: false }
 jobs:
-  heartbeat:
+  tick:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Install deps
-        run: pip install numpy scipy sympy
-      - name: Verify chain
-        run: python3 vinf_console.py verify
-      - name: Tick
-        run: python3 vinf_console.py tick
-      - name: Bundle
-        run: python3 vinf_console.py bundle
-      - name: Commit & Push
+        with: { python-version: '3.12' }
+      - run: pip install -q numpy pandas scipy sympy z3-solver
+      - name: v∞ tick
+        env:
+          VINF_KEY_DEEPSEEK: ${{ secrets.VINF_KEY_DEEPSEEK }}
+          VINF_KEY_DEEPSEEK2: ${{ secrets.VINF_KEY_DEEPSEEK2 }}
+          VINF_KEY_KIMI: ${{ secrets.VINF_KEY_KIMI }}
+        run: python3 ci_tick.py
+      - name: commit & push (冲突则重置后重tick)
         run: |
-          git config user.name "chepin-ai"
-          git config user.email "chepin@163.com"
+          git config user.email "vinf@kernel.dev"; git config user.name "v-infinity kernel"
           git add -A
-          git commit -m "[v∞] auto heartbeat $(date -u +%Y-%m-%d-%H:%M)" || true
-          git push
+          if git diff --cached --quiet; then echo "no-change"; exit 0; fi
+          git commit -m "[v∞] CI heartbeat $(date -u +%F' '%H:%M)"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            git rebase --abort 2>/dev/null || true
+            git reset --hard origin/main
+            python3 ci_tick.py
+            git add -A; git commit -m "[v∞] CI heartbeat $(date -u +%F' '%H:%M) (re-tick after race)" || true
+          done
+          git pull --rebase origin main && git push origin HEAD:main

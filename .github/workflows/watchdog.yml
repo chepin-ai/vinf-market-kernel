@@ -1,0 +1,23 @@
+name: v∞-watchdog
+on:
+  schedule: [{ cron: '0 9 * * 0' }]
+  workflow_dispatch:
+permissions: { contents: write }
+concurrency: { group: vinf-watchdog, cancel-in-progress: false }
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install -q numpy pandas scipy sympy z3-solver
+      - run: python3 ci_watchdog.py
+      - name: commit report
+        if: always()
+        run: |
+          git config user.email "vinf@kernel.dev"; git config user.name "v-infinity kernel"
+          git add WATCHDOG.md STATUS.md 2>/dev/null || true
+          git diff --cached --quiet && exit 0
+          git commit -m "[v∞] watchdog weekly $(date -u +%F)"
+          git pull --rebase origin main && git push origin HEAD:main
