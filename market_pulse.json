@@ -1,5 +1,5 @@
 {
- "updated": "2026-08-04 22:52:48",
+ "updated": "2026-08-05 11:10:27",
  "assets": {
   "CN300": {
    "last": 4600.9304,
@@ -12,7 +12,7 @@
    "name": "沪深300",
    "market": "CN",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "CNSH": {
    "last": 3822.2846,
@@ -25,7 +25,7 @@
    "name": "上证综指",
    "market": "CN",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "HK": {
    "last": 487.6,
@@ -38,7 +38,7 @@
    "name": "腾讯(港股代理)",
    "market": "HK",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "HSI": {
    "last": 26009.400390625,
@@ -51,7 +51,7 @@
    "name": "恒生指数",
    "market": "HK",
    "source": "local",
-   "stale_days": 2
+   "stale_days": 3
   },
   "SPX": {
    "last": 7743.6499023438,
@@ -64,7 +64,7 @@
    "name": "标普500",
    "market": "US",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "VIX": {
    "last": 16.5300006866,
@@ -77,7 +77,7 @@
    "name": "VIX",
    "market": "US",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "US10Y": {
    "last": 4.631000042,
@@ -90,7 +90,7 @@
    "name": "美债10Y",
    "market": "US",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   },
   "CNY": {
    "last": 6.7372999191,
@@ -103,7 +103,7 @@
    "name": "美元/离岸人民币",
    "market": "FX",
    "source": "local",
-   "stale_days": 1
+   "stale_days": 2
   },
   "GOLD": {
    "last": 884.22,
@@ -116,7 +116,7 @@
    "name": "黄金现货(沪)",
    "market": "CMD",
    "source": "local",
-   "stale_days": 0
+   "stale_days": 1
   }
  },
  "signals": [
@@ -225,6 +225,10 @@
    }
   ],
   "nav_history": [
+   {
+    "date": "2026-08-04",
+    "nav": 1.0
+   },
    {
     "date": "2026-08-04",
     "nav": 1.0
@@ -857,8 +861,8 @@
  "engines": {
   "heartbeat": {
    "expect": "每6h",
-   "last": "2026-08-04 20:29:17",
-   "chain_hops": 47,
+   "last": "2026-08-05 09:04:36",
+   "chain_hops": 53,
    "note": "Actions心跳/手机验证者共用协议"
   },
   "watchdog": {
@@ -873,7 +877,7 @@
   },
   "market_pulse": {
    "expect": "交易日2次",
-   "last": "2026-08-04 22:52:48",
+   "last": "2026-08-05 11:10:27",
    "note": "本脉搏+虚拟盘记账"
   },
   "phone_verifier": {
