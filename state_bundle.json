@@ -1,19 +1,19 @@
 {
  "status": {
-  "ts": "2026-08-04 20:29:17",
+  "ts": "2026-08-05 03:32:03",
   "chain": {
    "ok": true,
-   "hops": 47,
-   "tail": "84f083667c95"
+   "hops": 51,
+   "tail": "9237573c0a97"
   },
   "db": {
    "theorems": 24,
    "predictions": 6,
    "assets": 0,
    "debts": 9,
-   "frontier": 139
+   "frontier": 155
   },
-  "last_tick": "2026-08-04 20:29:17",
+  "last_tick": "2026-08-05 03:32:02",
   "finance": [
    "[fin:F1] skip — vrp_ladder.csv缺席",
    "[fin:F2] skip — 缺数据",
@@ -280,7 +280,7 @@
     "rel": "evolves"
    }
   ],
-  "built": "2026-08-04 20:29:17"
+  "built": "2026-08-05 03:32:02"
  },
  "cell_complex": {
   "V": 32,
@@ -530,6 +530,102 @@
  ],
  "frontier": [
   {
+   "id": 177,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 176,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 175,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 174,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 173,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 172,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 171,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 170,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 169,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 168,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 167,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 166,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 165,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 164,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 163,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 162,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
    "id": 161,
    "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
    "source": "finance_engine",
@@ -670,102 +766,6 @@
   {
    "id": 138,
    "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 137,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 136,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 135,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 134,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 133,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 132,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 131,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 130,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 129,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 128,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 127,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 126,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 125,
-   "finding": "[fin:F4] pass — 高税市场离散度中位=0.58 vs 低税=0.44 (×1.3) — D3派生成立",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 124,
-   "finding": "[fin:F3] pass — D∞/D1中位=7.3×, 阶梯单调=True",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 123,
-   "finding": "[fin:F2] pass — VRP>0命中率: 全期限63%, 长端(≥90d)68%",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 122,
-   "finding": "[fin:F1] pass — VRP期限秩相关=0.90, 长端=3.43点(t=8.1)",
    "source": "finance_engine",
    "round": 40
   }
@@ -1408,6 +1408,55 @@
    ],
    "prev_hash": "4737750d2008323dfad3d4ba0e82451756b05da7b6fb2a6a2d682a81b80e2b7c",
    "hash": "84f083667c958347465b62a6db5e5378872af7fda89d1d48c7852b6d4adab3ae"
+  },
+  {
+   "tick": 1785875854,
+   "ts": "2026-08-04 20:37:34",
+   "actions": [
+    "market-pulse: CN300=4601(0d); CNSH=3822(0d); HK=488(0d); HSI=26009(2d); SPX=7744(0d); VIX=17(0d); US10Y=5(0d); CNY=7(1d); GOLD=884(0d)",
+    "paper: NAV=1.0000 持仓=['红利'] 动作=hold",
+    "signals: 2条 含critical: 沪深300 波动率3年分位97% ≥90% — 收缩类外区, 剪枝策略禁用, 票据兑付期",
+    "sources: {'CN300': 'local', 'CNSH': 'local', 'HK': 'local', 'HSI': 'local', 'SPX': 'local', 'VIX': 'local', 'US10Y': 'local', 'CNY': 'local', 'GOLD': 'local'}"
+   ],
+   "prev_hash": "84f083667c958347465b62a6db5e5378872af7fda89d1d48c7852b6d4adab3ae",
+   "hash": "1e3e4b910c42045bec38f6f3789c23df7c93439faa303ac278b798a54ceb3e47"
+  },
+  {
+   "tick": 1785883968,
+   "ts": "2026-08-04 22:52:48",
+   "actions": [
+    "market-pulse: CN300=4601(0d); CNSH=3822(0d); HK=488(0d); HSI=26009(2d); SPX=7744(0d); VIX=17(0d); US10Y=5(0d); CNY=7(1d); GOLD=884(0d)",
+    "paper: NAV=1.0000 持仓=['红利'] 动作=hold",
+    "signals: 2条 含critical: 沪深300 波动率3年分位97% ≥90% — 收缩类外区, 剪枝策略禁用, 票据兑付期",
+    "sources: {'CN300': 'local', 'CNSH': 'local', 'HK': 'local', 'HSI': 'local', 'SPX': 'local', 'VIX': 'local', 'US10Y': 'local', 'CNY': 'local', 'GOLD': 'local'}"
+   ],
+   "prev_hash": "1e3e4b910c42045bec38f6f3789c23df7c93439faa303ac278b798a54ceb3e47",
+   "hash": "8269e91f7e480f599a9fad00e933f32cf05425a65da0dfdef38fa6cfc084ddc4"
+  },
+  {
+   "tick": 1785900721,
+   "ts": "2026-08-05 03:32:01",
+   "actions": [
+    "sync: db={'theorems': 24, 'predictions': 6, 'assets': 0, 'debts': 9, 'frontier': 143}",
+    "closure: 0"
+   ],
+   "prev_hash": "8269e91f7e480f599a9fad00e933f32cf05425a65da0dfdef38fa6cfc084ddc4",
+   "hash": "b85ef9f691a0e0bae0b9385bcc706d3b475086138a9ebcf90dff724b20ba5d04"
+  },
+  {
+   "tick": 1785900722,
+   "ts": "2026-08-05 03:32:02",
+   "actions": [
+    "closure: 0",
+    "journal: b85ef9f691a0",
+    "finance: [('F1', 'skip'), ('F2', 'skip'), ('F3', 'skip'), ('F4', 'archived')]",
+    "ontology: triples=360 parse=OK contradictions=0",
+    "reasoner: deduce=0 alarm=0 emergent=0 topo=OK",
+    "doctor: 5/6健康 修复1 遗留0",
+    "status: chain=ok tail=b85ef9f691a0"
+   ],
+   "prev_hash": "b85ef9f691a0e0bae0b9385bcc706d3b475086138a9ebcf90dff724b20ba5d04",
+   "hash": "9237573c0a97e043cfa368a777fec0a877dea9878496d8816ce4f8ec62371e41"
   }
  ],
  "policy": {
@@ -2022,7 +2071,7 @@
   ]
  },
  "market": {
-  "updated": "2026-08-05 02:49:26",
+  "updated": "2026-08-04 22:52:48",
   "assets": {
    "CN300": {
     "last": 4600.9304,
@@ -2034,7 +2083,7 @@
     "rv_pct3y": 96.6931216931217,
     "name": "沪深300",
     "market": "CN",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "CNSH": {
@@ -2047,7 +2096,7 @@
     "rv_pct3y": 83.33333333333334,
     "name": "上证综指",
     "market": "CN",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "HK": {
@@ -2060,7 +2109,7 @@
     "rv_pct3y": 84.14464534075104,
     "name": "腾讯(港股代理)",
     "market": "HK",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "HSI": {
@@ -2073,7 +2122,7 @@
     "rv_pct3y": 47.54797441364605,
     "name": "恒生指数",
     "market": "HK",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 2
    },
    "SPX": {
@@ -2086,7 +2135,7 @@
     "rv_pct3y": 77.38095238095238,
     "name": "标普500",
     "market": "US",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "VIX": {
@@ -2099,7 +2148,7 @@
     "rv_pct3y": 73.80952380952381,
     "name": "VIX",
     "market": "US",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "US10Y": {
@@ -2112,7 +2161,7 @@
     "rv_pct3y": 14.153439153439153,
     "name": "美债10Y",
     "market": "US",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 0
    },
    "CNY": {
@@ -2121,11 +2170,11 @@
     "chg1d": -0.201452739925434,
     "mom20": -0.5799380352979444,
     "mom60": -0.7878317856511718,
-    "rv20": 1.2883581120405097,
+    "rv20": 1.2883581120404544,
     "rv_pct3y": 13.624338624338625,
     "name": "美元/离岸人民币",
     "market": "FX",
-    "source": "local(无新数据)",
+    "source": "local",
     "stale_days": 1
    },
    "GOLD": {
@@ -2160,14 +2209,14 @@
    "SPX": "中性区(分位77%): 长端收割+票据组合体可运行, 仓位随分位递增递减"
   },
   "sources": {
-   "CN300": "local(无新数据)",
-   "CNSH": "local(无新数据)",
-   "HK": "local(无新数据)",
-   "HSI": "local(无新数据)",
-   "SPX": "local(无新数据)",
-   "VIX": "local(无新数据)",
-   "US10Y": "local(无新数据)",
-   "CNY": "local(无新数据)",
+   "CN300": "local",
+   "CNSH": "local",
+   "HK": "local",
+   "HSI": "local",
+   "SPX": "local",
+   "VIX": "local",
+   "US10Y": "local",
+   "CNY": "local",
    "GOLD": "local"
   },
   "rotation": {
@@ -2248,6 +2297,14 @@
     }
    ],
    "nav_history": [
+    {
+     "date": "2026-08-04",
+     "nav": 1.0
+    },
+    {
+     "date": "2026-08-04",
+     "nav": 1.0
+    },
     {
      "date": "2026-08-04",
      "nav": 1.0
@@ -2872,8 +2929,8 @@
   "engines": {
    "heartbeat": {
     "expect": "每6h",
-    "last": "2026-08-05 02:08:47",
-    "chain_hops": 40,
+    "last": "2026-08-04 20:29:17",
+    "chain_hops": 47,
     "note": "Actions心跳/手机验证者共用协议"
    },
    "watchdog": {
@@ -2888,7 +2945,7 @@
    },
    "market_pulse": {
     "expect": "交易日2次",
-    "last": "2026-08-05 02:49:26",
+    "last": "2026-08-04 22:52:48",
     "note": "本脉搏+虚拟盘记账"
    },
    "phone_verifier": {
@@ -2916,7 +2973,7 @@
   "ttl_file": "kg.ttl"
  },
  "reasoner": {
-  "ts": "2026-08-04 20:29:16",
+  "ts": "2026-08-05 03:32:01",
   "deductions": [],
   "topology": {
    "ok": true,
@@ -2936,12 +2993,12 @@
   "emergent": []
  },
  "doctor": {
-  "ts": "2026-08-04 20:29:16",
+  "ts": "2026-08-05 03:32:01",
   "checks": [
    {
     "name": "链完整性",
     "ok": true,
-    "note": "46跳 尾4737750d2008"
+    "note": "50跳 尾b85ef9f691a0"
    },
    {
     "name": "金融状态新鲜度",
@@ -2951,7 +3008,7 @@
    {
     "name": "CN系时效",
     "ok": true,
-    "note": "沪深300最新2026-08-04 (0d)"
+    "note": "沪深300最新2026-08-04 (1d)"
    },
    {
     "name": "状态包新鲜度",
