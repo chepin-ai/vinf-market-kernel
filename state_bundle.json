@@ -1,19 +1,19 @@
 {
  "status": {
-  "ts": "2026-08-07 03:16:52",
+  "ts": "2026-08-07 07:40:47",
   "chain": {
    "ok": true,
-   "hops": 73,
-   "tail": "0376806e9c31"
+   "hops": 75,
+   "tail": "9e008e53b929"
   },
   "db": {
    "theorems": 24,
    "predictions": 6,
    "assets": 0,
    "debts": 9,
-   "frontier": 299
+   "frontier": 315
   },
-  "last_tick": "2026-08-07 03:16:52",
+  "last_tick": "2026-08-07 07:40:47",
   "finance": [
    "[fin:F1] skip — vrp_ladder.csv缺席",
    "[fin:F2] skip — 缺数据",
@@ -280,7 +280,7 @@
     "rel": "evolves"
    }
   ],
-  "built": "2026-08-07 03:16:52"
+  "built": "2026-08-07 07:40:47"
  },
  "cell_complex": {
   "V": 32,
@@ -530,6 +530,102 @@
  ],
  "frontier": [
   {
+   "id": 337,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 336,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 335,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 334,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 333,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 332,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 331,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 330,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 329,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 328,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 327,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 326,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 325,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 324,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 323,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 322,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
    "id": 321,
    "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
    "source": "finance_engine",
@@ -669,102 +765,6 @@
   },
   {
    "id": 298,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 297,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 296,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 295,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 294,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 293,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 292,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 291,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 290,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 289,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 288,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 287,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 286,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 285,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 284,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 283,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 282,
    "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
    "source": "finance_engine",
    "round": 40
@@ -1730,6 +1730,31 @@
    ],
    "prev_hash": "cc008c521a3c75813cea90699a017ce5c1748b6eacbace339d64f7c6e290696a",
    "hash": "0376806e9c31ebb00d9eecce70dff02fe9196b0a6720e1802765c9fc12d942fc"
+  },
+  {
+   "tick": 1786088446,
+   "ts": "2026-08-07 07:40:46",
+   "actions": [
+    "sync: db={'theorems': 24, 'predictions': 6, 'assets': 0, 'debts': 9, 'frontier': 303}",
+    "closure: 0"
+   ],
+   "prev_hash": "0376806e9c31ebb00d9eecce70dff02fe9196b0a6720e1802765c9fc12d942fc",
+   "hash": "43961348620a23d9b85a1c7d81db79a7b1d9de737c0cb6216c3ee852057ee304"
+  },
+  {
+   "tick": 1786088447,
+   "ts": "2026-08-07 07:40:47",
+   "actions": [
+    "closure: 0",
+    "journal: 43961348620a",
+    "finance: [('F1', 'skip'), ('F2', 'skip'), ('F3', 'skip'), ('F4', 'archived')]",
+    "ontology: triples=360 parse=OK contradictions=0",
+    "reasoner: deduce=0 alarm=0 emergent=0 topo=OK",
+    "doctor: 5/6健康 修复1 遗留0",
+    "status: chain=ok tail=43961348620a"
+   ],
+   "prev_hash": "43961348620a23d9b85a1c7d81db79a7b1d9de737c0cb6216c3ee852057ee304",
+   "hash": "9e008e53b929750e4d689ed4eebbadc713f57701d1044d039448433c348494df"
   }
  ],
  "policy": {
@@ -3262,7 +3287,7 @@
   "ttl_file": "kg.ttl"
  },
  "reasoner": {
-  "ts": "2026-08-07 03:16:51",
+  "ts": "2026-08-07 07:40:46",
   "deductions": [],
   "topology": {
    "ok": true,
@@ -3282,12 +3307,12 @@
   "emergent": []
  },
  "doctor": {
-  "ts": "2026-08-07 03:16:51",
+  "ts": "2026-08-07 07:40:46",
   "checks": [
    {
     "name": "链完整性",
     "ok": true,
-    "note": "72跳 尾cc008c521a3c"
+    "note": "74跳 尾43961348620a"
    },
    {
     "name": "金融状态新鲜度",
