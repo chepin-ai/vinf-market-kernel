@@ -1,19 +1,19 @@
 {
  "status": {
-  "ts": "2026-08-07 19:14:45",
+  "ts": "2026-08-08 02:21:22",
   "chain": {
    "ok": true,
-   "hops": 80,
-   "tail": "b40fc1fc2648"
+   "hops": 83,
+   "tail": "e80ee0de416c"
   },
   "db": {
    "theorems": 24,
    "predictions": 6,
    "assets": 0,
    "debts": 9,
-   "frontier": 347
+   "frontier": 363
   },
-  "last_tick": "2026-08-07 19:14:45",
+  "last_tick": "2026-08-08 02:21:21",
   "finance": [
    "[fin:F1] skip — vrp_ladder.csv缺席",
    "[fin:F2] skip — 缺数据",
@@ -280,7 +280,7 @@
     "rel": "evolves"
    }
   ],
-  "built": "2026-08-07 19:14:45"
+  "built": "2026-08-08 02:21:22"
  },
  "cell_complex": {
   "V": 32,
@@ -530,6 +530,102 @@
  ],
  "frontier": [
   {
+   "id": 385,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 384,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 383,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 382,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 381,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 380,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 379,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 378,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 377,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 376,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 375,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 374,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 373,
+   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 372,
+   "finding": "[fin:F3] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 371,
+   "finding": "[fin:F2] skip — 缺数据",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
+   "id": 370,
+   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
+   "source": "finance_engine",
+   "round": 40
+  },
+  {
    "id": 369,
    "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
    "source": "finance_engine",
@@ -669,102 +765,6 @@
   },
   {
    "id": 346,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 345,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 344,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 343,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 342,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 341,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 340,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 339,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 338,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 337,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 336,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 335,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 334,
-   "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 333,
-   "finding": "[fin:F4] archived — sharpapi面板=历史资产(已归档); D3派生检验留待同类面板再现时激活",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 332,
-   "finding": "[fin:F3] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 331,
-   "finding": "[fin:F2] skip — 缺数据",
-   "source": "finance_engine",
-   "round": 40
-  },
-  {
-   "id": 330,
    "finding": "[fin:F1] skip — vrp_ladder.csv缺席",
    "source": "finance_engine",
    "round": 40
@@ -1817,6 +1817,43 @@
    ],
    "prev_hash": "b6ecf374919453fb2b7f5dc9180e849ebb76063e37552d1cbb1041a3d5e42a89",
    "hash": "b40fc1fc264879d4dd30e4fe5f275a4a8bb41638a1e75d8b1e9a4c2134c8c701"
+  },
+  {
+   "tick": 1786141499,
+   "ts": "2026-08-07 22:24:59",
+   "actions": [
+    "market-pulse: CN300=4601(3d); CNSH=3822(3d); HK=488(3d); HSI=26009(5d); SPX=7744(3d); VIX=17(3d); US10Y=5(3d); CNY=7(4d); GOLD=884(3d)",
+    "paper: NAV=1.0000 持仓=['红利'] 动作=hold",
+    "signals: 2条 含critical: 沪深300 波动率3年分位97% ≥90% — 收缩类外区, 剪枝策略禁用, 票据兑付期",
+    "sources: {'CN300': 'local', 'CNSH': 'local', 'HK': 'local', 'HSI': 'local', 'SPX': 'local', 'VIX': 'local', 'US10Y': 'local', 'CNY': 'local', 'GOLD': 'local'}"
+   ],
+   "prev_hash": "b40fc1fc264879d4dd30e4fe5f275a4a8bb41638a1e75d8b1e9a4c2134c8c701",
+   "hash": "278a200a9e2fcbfdbaa56139d889febaab1e812d443a35235c3fa807f3846c7d"
+  },
+  {
+   "tick": 1786155680,
+   "ts": "2026-08-08 02:21:20",
+   "actions": [
+    "sync: db={'theorems': 24, 'predictions': 6, 'assets': 0, 'debts': 9, 'frontier': 351}",
+    "closure: 0"
+   ],
+   "prev_hash": "278a200a9e2fcbfdbaa56139d889febaab1e812d443a35235c3fa807f3846c7d",
+   "hash": "3c6d9684cf88d5d4316e748b867a303d20a2f5b49524e2ecadedd43dc67a0a06"
+  },
+  {
+   "tick": 1786155681,
+   "ts": "2026-08-08 02:21:21",
+   "actions": [
+    "closure: 0",
+    "journal: 3c6d9684cf88",
+    "finance: [('F1', 'skip'), ('F2', 'skip'), ('F3', 'skip'), ('F4', 'archived')]",
+    "ontology: triples=360 parse=OK contradictions=0",
+    "reasoner: deduce=0 alarm=0 emergent=0 topo=OK",
+    "doctor: 5/6健康 修复1 遗留0",
+    "status: chain=ok tail=3c6d9684cf88"
+   ],
+   "prev_hash": "3c6d9684cf88d5d4316e748b867a303d20a2f5b49524e2ecadedd43dc67a0a06",
+   "hash": "e80ee0de416cccc45a50d39b949d88f2f2c4bac6a08fb4f7b71e3b4d8eb4a654"
   }
  ],
  "policy": {
@@ -2431,7 +2468,7 @@
   ]
  },
  "market": {
-  "updated": "2026-08-07 09:46:31",
+  "updated": "2026-08-07 22:24:59",
   "assets": {
    "CN300": {
     "last": 4600.9304,
@@ -2657,6 +2694,10 @@
     }
    ],
    "nav_history": [
+    {
+     "date": "2026-08-04",
+     "nav": 1.0
+    },
     {
      "date": "2026-08-04",
      "nav": 1.0
@@ -3309,8 +3350,8 @@
   "engines": {
    "heartbeat": {
     "expect": "每6h",
-    "last": "2026-08-07 07:40:47",
-    "chain_hops": 75,
+    "last": "2026-08-07 19:14:45",
+    "chain_hops": 80,
     "note": "Actions心跳/手机验证者共用协议"
    },
    "watchdog": {
@@ -3325,7 +3366,7 @@
    },
    "market_pulse": {
     "expect": "交易日2次",
-    "last": "2026-08-07 09:46:31",
+    "last": "2026-08-07 22:24:59",
     "note": "本脉搏+虚拟盘记账"
    },
    "phone_verifier": {
@@ -3353,7 +3394,7 @@
   "ttl_file": "kg.ttl"
  },
  "reasoner": {
-  "ts": "2026-08-07 19:14:44",
+  "ts": "2026-08-08 02:21:20",
   "deductions": [],
   "topology": {
    "ok": true,
@@ -3373,12 +3414,12 @@
   "emergent": []
  },
  "doctor": {
-  "ts": "2026-08-07 19:14:44",
+  "ts": "2026-08-08 02:21:21",
   "checks": [
    {
     "name": "链完整性",
     "ok": true,
-    "note": "79跳 尾b6ecf3749194"
+    "note": "82跳 尾3c6d9684cf88"
    },
    {
     "name": "金融状态新鲜度",
@@ -3388,7 +3429,7 @@
    {
     "name": "CN系时效",
     "ok": true,
-    "note": "沪深300最新2026-08-04 (3d)"
+    "note": "沪深300最新2026-08-04 (4d)"
    },
    {
     "name": "状态包新鲜度",
